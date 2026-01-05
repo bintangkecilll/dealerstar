@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Star - Eksklusivitas & Performa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --primary-light: #ff9d47;
+            --dark: #0a0a0a;
+            --dark-accent: #141414;
+            --light: #f8f9fa;
+            --gray: #888;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { background: var(--white); color: #333; line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 25px; }
+
+        /* --- Animations --- */
+        .reveal { opacity: 0; transition: all 0.8s ease-out; }
+        .reveal-up { transform: translateY(50px); }
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-right { transform: translateX(50px); }
+        .reveal-zoom { transform: scale(0.9); }
+        .active { opacity: 1; transform: translate(0) scale(1); }
+
+        /* --- Navbar --- */
+        header {
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li a { color: #ccc; text-decoration: none; margin: 0 18px; font-size: 13px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+        
+        .btn-filled {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+            display: inline-block;
+        }
+        .btn-filled:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.5); }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: radial-gradient(circle at bottom right, #1a2a3a, #000000);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-flex { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 60px; 
+            position: relative; 
+            z-index: 2; 
+            width: 100%;
+        }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 58px; line-height: 1.1; margin-bottom: 25px; font-weight: 900; text-transform: uppercase; }
+        .hero-content p { font-size: 18px; color: #bbb; margin-bottom: 40px; max-width: 500px; }
+        
+        .hero-visual { flex: 1.2; display: flex; justify-content: flex-end; }
+        .hero-visual img { 
+            width: 110%; 
+            max-width: 800px; 
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.7));
+        }
+
+        /* --- Katalog Produk --- */
+        .product-showcase { padding: 100px 0; background: #fdfdfd; }
+        .section-title { font-size: 34px; font-weight: 900; text-transform: uppercase; text-align: center; margin-bottom: 50px; }
+        .section-title span { color: var(--primary); }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        .filter-item {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--dark);
+            border: 1px solid #eee;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+        }
+        .filter-item img { width: 30px; height: auto; opacity: 0.6; }
+        .filter-item.active { background: var(--dark); color: white; border-color: var(--dark); }
+        .filter-item.active img { opacity: 1; filter: brightness(0) invert(1); }
+
+        .carousel-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .side-car { width: 220px; opacity: 0.2; transform: scale(0.8); transition: var(--transition); filter: grayscale(1); cursor: pointer; }
+        .center-car { width: 650px; transition: var(--transition); filter: drop-shadow(0 25px 45px rgba(0,0,0,0.15)); }
+        .nav-btn {
+            background: white; border: none; width: 55px; height: 55px; border-radius: 50%;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
+        }
+        .nav-btn:hover { background: var(--primary); color: white; }
+
+        .car-info-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr 1.2fr;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .info-col { padding: 45px; border-right: 1px solid #f5f5f5; }
+        .info-col:last-child { border: none; background: #fafafa; }
+        .info-price h4 { color: var(--primary); font-size: 32px; font-weight: 900; white-space: nowrap; margin-top: 10px; }
+        .info-actions { display: flex; flex-direction: column; gap: 15px; justify-content: center; }
+
+        /* --- Mengapa Memilih Kami --- */
+        .why-choose { padding: 100px 0; background: var(--dark); color: white; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
+        .why-card {
+            padding: 40px 30px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .why-card:hover { transform: translateY(-10px); background: rgba(230, 126, 34, 0.05); border-color: var(--primary); }
+        .why-card i { font-size: 40px; color: var(--primary); margin-bottom: 25px; }
+        .why-card h4 { font-size: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .why-card p { color: #888; font-size: 14px; }
+
+        /* --- FAQ Section --- */
+        .faq-section { padding: 120px 0; background: var(--white); }
+        .faq-container { max-width: 800px; margin: 50px auto 0; }
+        .faq-item { border-bottom: 1px solid #eee; padding: 20px 0; cursor: pointer; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 18px; color: var(--dark); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: all 0.5s ease; color: var(--gray); font-size: 15px; margin-top: 0; }
+        .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; }
+        .faq-icon { transition: transform 0.3s ease; color: var(--primary); }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* --- Section Blog --- */
+        .blog-section { padding: 100px 0; background: #fdfdfd; }
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .blog-card { 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: #fff; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+            border-bottom: 4px solid transparent;
+            transition: var(--transition);
+        }
+        .blog-card:hover { transform: translateY(-15px); border-bottom-color: var(--primary); }
+        .blog-card img { width: 100%; height: 250px; object-fit: cover; }
+        .blog-tag { background: var(--primary); color: white; padding: 5px 15px; font-size: 10px; font-weight: 800; text-transform: uppercase; border-radius: 4px; display: inline-block; margin-bottom: 15px; }
+
+        /* --- Testimonials --- */
+        .testimonials { padding: 100px 0; background: var(--dark); color: white; overflow: hidden; }
+        .testi-wrapper { 
+            display: flex; 
+            gap: 30px; 
+            width: max-content; 
+            animation: scroll 35s linear infinite; 
+            padding: 20px 0;
+        }
+        .testi-wrapper:hover { animation-play-state: paused; }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .testi-card { 
+            background: var(--dark-accent); 
+            padding: 40px; 
+            border-radius: 15px; 
+            width: 450px; 
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .testi-card:hover { border-color: var(--primary); background: #222; }
+
+        /* --- Footer --- */
+        footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; }
+        .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); }
+        .footer-col ul li { list-style: none; margin-bottom: 12px; }
+        .footer-col ul li a { color: #666; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+
+        @media (max-width: 992px) {
+            .hero-flex { flex-direction: column; text-align: center; }
+            .hero-visual { justify-content: center; }
+            .car-info-row { grid-template-columns: 1fr; }
+            .side-car { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">DEALER<span>STAR</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="book.html">Book Test Drive</a></li>
+                    <li><a href="blog.html">Artikel</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="https://wa.me/628123456789" class="btn-filled">Kontak Eksklusif</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-flex">
+            <div class="hero-content reveal reveal-left">
+                <span style="color: var(--primary); font-weight: 800; letter-spacing: 4px; text-transform: uppercase; font-size: 12px;">Premium Dealership</span>
+                <h1>Drive Your<br>Perfect Journey</h1>
+                <p>Dealer Star menyediakan pilihan mobil eksklusif dengan penawaran harga terbaik dan pelayanan purna jual berstandar internasional.</p>
+                <div class="hero-actions">
+                    <a href="#katalog" class="btn-filled">Lihat Koleksi</a>
+                    <a href="#" style="color: white; margin-left: 25px; text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 5px;">Book Test Drive</a>
+                </div>
+            </div>
+            <div class="hero-visual reveal reveal-right">
+                <img src="img/mobil.avif" alt="Star Car">
+            </div>
+        </div>
+    </section>
+
+    <section id="katalog" class="product-showcase">
+        <div class="container reveal reveal-up">
+            <h2 class="section-title">Katalog <span>Unggulan</span></h2>
+            
+            <div class="filter-bar">
+                <div class="filter-item active" onclick="filterCategory('EV', this)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt=""> EV Series
+                </div>
+                <div class="filter-item" onclick="filterCategory('SUV', this)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png" alt=""> Prestige SUV
+                </div>
+                <div class="filter-item" onclick="filterCategory('MPV', this)">
+                    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt=""> Luxury MPV
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-main">
+                    <button class="nav-btn" onclick="prevCar()"><i class="fas fa-chevron-left"></i></button>
+                    <img id="prevImg" class="side-car" src="" alt="" onclick="prevCar()">
+                    <img id="mainImg" class="center-car" src="" alt="">
+                    <img id="nextImg" class="side-car" src="" alt="" onclick="nextCar()">
+                    <button class="nav-btn" onclick="nextCar()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <div class="car-info-row" id="infoRow">
+                    <div class="info-col">
+                        <span id="carTag" style="color: var(--primary); font-weight: 800; font-size: 11px; letter-spacing: 2px;">LOADING...</span>
+                        <h3 id="carName" style="font-weight: 900; margin: 5px 0;">---</h3>
+                        <p style="margin-top: 20px; color: #999; font-size: 11px; font-weight: 700;">OTR JAKARTA</p>
+                        <h4 id="carPrice">Rp 0</h4>
+                    </div>
+                    <div class="info-col">
+                        <h5 style="text-transform: uppercase; font-size: 13px; letter-spacing: 1px; margin-bottom: 15px; color: var(--primary);">Spesifikasi Utama</h5>
+                        <p id="carDesc" style="color: #666; font-size: 14px; line-height: 1.8;"></p>
+                    </div>
+                    <div class="info-col info-actions">
+                        <a href="#" id="detailLink" class="btn-filled" style="text-align: center;">Detail Unit</a>
+                        <a href="#" id="waLink" style="text-align: center; color: var(--dark); text-decoration: none; font-weight: 800; font-size: 12px; border: 1px solid #ddd; padding: 12px; border-radius: 4px;">TANYA SALES</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mengapa" class="why-choose">
+        <div class="container reveal reveal-zoom">
+            <h2 class="section-title" style="color: white;">Mengapa <span>Dealer Star?</span></h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4>Garansi Resmi</h4>
+                    <p>Perlindungan penuh hingga 5 tahun untuk ketenangan berkendara Anda.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-tools"></i>
+                    <h4>Layanan 24/7</h4>
+                    <p>Bantuan darurat di jalan dan konsultasi teknis kapanpun Anda butuhkan.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h4>Harga Terbaik</h4>
+                    <p>Penawaran harga paling kompetitif dengan opsi cicilan bunga 0%.</p>
+                </div>
+                <div class="why-card">
+                    <i class="fas fa-car-side"></i>
+                    <h4>Home Test Drive</h4>
+                    <p>Kami bawakan mobil impian Anda ke depan pintu rumah untuk diuji coba.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section id="blog" class="blog-section container reveal reveal-up">
+        <h2 class="section-title">Berita & <span>Panduan</span></h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <div class="blog-card-content" style="padding: 30px;">
+                    <span class="blog-tag">Technology</span>
+                    <h4>Masa Depan Mobil Listrik 2026</h4>
+                    <p>Bagaimana infrastruktur charging station mendukung gaya hidup modern kita...</p>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <div class="blog-card-content" style="padding: 30px;">
+                    <span class="blog-tag">Maintenance</span>
+                    <h4>5 Cara Menjaga Interior Mobil</h4>
+                    <p>Tips merawat kulit jok asli dan panel wood agar tidak mudah kusam dan retak...</p>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <div class="blog-card-content" style="padding: 30px;">
+                    <span class="blog-tag">Promo</span>
+                    <h4>Highlight Expo Jakarta</h4>
+                    <p>Dokumentasi kemeriahan acara pameran mobil termewah di awal tahun ini...</p>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni" class="testimonials reveal reveal-up">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Kesan <span>Pelanggan</span></h2>
+        </div>
+        <div class="testi-wrapper">
+            <div class="testi-card">
+                <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                <p>"Dealer Star memberikan layanan VVIP. Mobil impian saya sampai lebih cepat dari estimasi dengan kondisi sempurna!"</p>
+                <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=1" width="100%" alt=""></div>
+                    <div><strong>Robert Downey</strong><br><small style="color: var(--primary);">Executive CEO</small></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                <p>"Terima kasih Dealer Star. Proses tukar tambah sangat transparan dan harga yang diberikan sangat kompetitif."</p>
+                <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=2" width="100%" alt=""></div>
+                    <div><strong>Amanda Rawles</strong><br><small style="color: var(--primary);">Public Figure</small></div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                <p>"Sangat puas dengan layanan after-salesnya. Servis berkala jadi sangat mudah dan tidak perlu antre lama."</p>
+                <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=3" width="100%" alt=""></div>
+                    <div><strong>Kevin Sanjaya</strong><br><small style="color: var(--primary);">Professional Athlete</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container reveal reveal-up">
+            <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
+            <div class="faq-container">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">Bagaimana cara memesan test drive? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-answer">Anda dapat mengklik tombol "Book Test Drive" di bagian hero atau menghubungi sales kami melalui WhatsApp. Kami dapat membawakan unit ke rumah Anda.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">Apakah melayani tukar tambah? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-answer">Ya, Dealer Star melayani Trade-In (tukar tambah) dengan harga taksir yang sangat kompetitif dan transparan untuk semua merk mobil.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">Apa saja syarat pengajuan kredit? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-answer">Syarat umum meliputi KTP, KK, NPWP, Slip Gaji/Surat Keterangan Penghasilan, dan rekening koran 3 bulan terakhir. Tim kami akan membantu prosesnya hingga approve.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">Berapa lama garansi unit mobil baru? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-answer">Setiap unit baru di Dealer Star dilengkapi garansi resmi pabrikan hingga 5 tahun atau 100.000 KM, tergantung mana yang tercapai lebih dulu.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col reveal reveal-up">
+                <div class="logo">DEALER<span>STAR</span></div>
+                <p style="margin-top: 20px;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi.</p>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Katalog Unit</a></li>
+                    <li><a href="#">Booking Service</a></li>
+                    <li><a href="#">Tukar Tambah</a></li>
+                </ul>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Kontak</h4>
+                <p style="color: #666; font-size: 14px;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> Sudirman Central Business, Jakarta</p>
+                <p style="color: #666; font-size: 14px; margin-top: 10px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const database = {
+            'EV': [
+                { name: "Star Cloud EV Plus", tag: "EV SERIES", price: "Rp 415.000.000", desc: "Jarak tempuh 500KM, Fast charging 30 menit, Panoramic Sunroof, ADAS Lvl 2.", img: "img/mobil3.png", link: "detailkatalog1.html" },
+                { name: "Star Air Pro", tag: "CITY EV", price: "Rp 295.000.000", desc: "Compact design, 300KM range, Intelligent voice command, Easy parking assist.", img: "img/mobil4.png", link: "detailkatalog2.html" }
+            ],
+            'SUV': [
+                { name: "Prestige X-SUV", tag: "PRESTIGE SUV", price: "Rp 1.150.000.000", desc: "V6 Twin Turbo, AWD System, Premium Nappa Leather, 21-inch Alloy Wheels.", img: "img/mobil5.png", link: "detailkatalog3.html" }
+            ],
+            'MPV': [
+                { name: "Royal Star MPV", tag: "FAMILY ROYAL", price: "Rp 890.000.000", desc: "Captain seat with massage, Dual zone AC, Premium sound system, Power sliding door.", img: "img/mobil6.png", link: "detailkatalog4.html" }
+            ]
+        };
+
+        let currentCategory = 'EV';
+        let currentIndex = 0;
+
+        function updateDisplay() {
+            const list = database[currentCategory];
+            const car = list[currentIndex];
+            const prevIdx = (currentIndex === 0) ? list.length - 1 : currentIndex - 1;
+            const nextIdx = (currentIndex === list.length - 1) ? 0 : currentIndex + 1;
+
+            document.getElementById('mainImg').src = car.img;
+            document.getElementById('prevImg').src = list[prevIdx].img;
+            document.getElementById('nextImg').src = list[nextIdx].img;
+
+            document.getElementById('carName').innerText = car.name;
+            document.getElementById('carPrice').innerText = car.price;
+            document.getElementById('carDesc').innerText = car.desc;
+            document.getElementById('carTag').innerText = car.tag;
+            
+            // UPDATE LINK DETAIL UNIT
+            document.getElementById('detailLink').href = car.link;
+            
+            document.getElementById('waLink').href = `https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit ${encodeURIComponent(car.name)}`;
+        }
+
+        function filterCategory(cat, el) {
+            currentCategory = cat;
+            currentIndex = 0;
+            document.querySelectorAll('.filter-item').forEach(item => item.classList.remove('active'));
+            el.classList.add('active');
+            updateDisplay();
+        }
+
+        function nextCar() {
+            currentIndex = (currentIndex === database[currentCategory].length - 1) ? 0 : currentIndex + 1;
+            updateDisplay();
+        }
+
+        function prevCar() {
+            currentIndex = (currentIndex === 0) ? database[currentCategory].length - 1 : currentIndex - 1;
+            updateDisplay();
+        }
+
+        function toggleFaq(el) {
+            const items = document.querySelectorAll('.faq-item');
+            items.forEach(item => {
+                if(item !== el) item.classList.remove('active');
+            });
+            el.classList.toggle('active');
+        }
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.onload = () => {
+            updateDisplay();
+            reveal();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Detail Star Air Pro - Dealer Star</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --primary-light: #ff9d47;
+            --dark: #0a0a0a;
+            --dark-accent: #141414;
+            --white: #ffffff;
+            --gray: #888;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            background: var(--dark); 
+            color: var(--white); 
+            padding-bottom: 100px;
+            overflow-x: hidden;
+        }
+
+        /* --- Reveal Animation --- */
+        .reveal { opacity: 0; transition: all 0.8s ease-out; }
+        .reveal-up { transform: translateY(30px); }
+        .active { opacity: 1; transform: translateY(0); }
+
+        /* --- Navbar --- */
+        .det-header {
+            position: sticky; top: 0; z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            min-height: 70px;
+            padding: 0 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .det-header .nav-title {
+            font-weight: 800; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--white);
+        }
+        .det-header a { 
+            color: white; width: 40px; height: 40px; 
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 18px; 
+        }
+
+        /* --- Hero Area --- */
+        .det-hero {
+            background: radial-gradient(circle at center, #1a2a3a, #000000);
+            padding: 50px 20px;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 350px;
+        }
+        .det-hero img { 
+            width: 100%; max-width: 600px;
+            height: auto; object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+        }
+        .det-bullets { display: flex; justify-content: center; gap: 10px; margin-top: 30px; }
+        .det-dot { width: 8px; height: 8px; border-radius: 50%; background: #333; transition: 0.3s; }
+        .det-dot.active { background: var(--primary); width: 25px; border-radius: 10px; }
+
+        /* --- Info Section --- */
+        .det-main-info { padding: 30px 25px; max-width: 1200px; margin: 0 auto; }
+        .det-tag { 
+            background: rgba(230, 126, 34, 0.1); color: var(--primary); 
+            padding: 6px 15px; border-radius: 4px; font-size: 11px; 
+            font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: inline-block;
+        }
+        .det-title { font-size: 32px; font-weight: 900; margin-bottom: 5px; }
+        .det-price { color: var(--primary); font-size: 24px; font-weight: 800; margin-bottom: 30px; }
+
+        /* --- Spec Grid --- */
+        .det-spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 40px; }
+        .det-spec-item {
+            background: var(--dark-accent); padding: 20px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05); text-align: center;
+        }
+        .det-spec-item i { color: var(--primary); font-size: 22px; margin-bottom: 10px; display: block; }
+        .det-spec-item span { font-size: 10px; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .det-spec-item strong { font-size: 15px; color: white; }
+
+        /* --- Tabs --- */
+        .det-tabs-nav { display: flex; gap: 25px; border-bottom: 1px solid #222; margin-bottom: 25px; }
+        .tab-link {
+            background: none; border: none; color: var(--gray); font-weight: 700;
+            padding: 15px 0; font-size: 13px; text-transform: uppercase; cursor: pointer;
+            position: relative; transition: 0.3s;
+        }
+        .tab-link.active { color: white; }
+        .tab-link.active::after {
+            content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background: var(--primary);
+        }
+        .tab-pane { display: none; line-height: 1.8; color: #aaa; font-size: 15px; animation: fadeIn 0.4s ease; margin-bottom: 50px; }
+        .tab-pane.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- RELATED UNITS SECTION --- */
+        .other-units-section { padding: 50px 0; border-top: 1px solid #222; }
+        .other-units-title { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; color: white; text-align: left; }
+        .other-units-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        
+        .unit-card { 
+            background: var(--dark-accent); border-radius: 20px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+            text-decoration: none; color: white; display: block;
+        }
+        .unit-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .unit-card-img { 
+            background: linear-gradient(180deg, #1a1a1a, #141414); 
+            padding: 25px; height: 220px;
+            display: flex; align-items: center; justify-content: center; 
+        }
+        .unit-card-img img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); }
+        .unit-card-info { padding: 20px 25px; background: rgba(255,255,255,0.02); }
+        .unit-card-info h4 { font-size: 18px; font-weight: 800; margin-bottom: 5px; }
+        .unit-card-info p { color: var(--primary); font-size: 16px; font-weight: 700; }
+
+        /* --- Sticky Bottom Bar --- */
+        .det-action-bar {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);
+            padding: 15px 20px 25px; display: flex; gap: 12px;
+            border-top: 1px solid rgba(255,255,255,0.1); z-index: 1000;
+        }
+        .btn-icon-wa {
+            width: 55px; height: 55px; border: 1px solid var(--primary); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); text-decoration: none; font-size: 22px; flex-shrink: 0;
+        }
+        .btn-action-outline {
+            flex: 1; height: 55px; border: 1px solid #333; color: white; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-weight: 700; font-size: 13px;
+        }
+        .btn-action-primary {
+            flex: 1.3; height: 55px; background: var(--primary); color: white; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            border: none; font-weight: 800; font-size: 13px; text-transform: uppercase; cursor: pointer;
+        }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 2000;
+            display: none; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-card {
+            background: var(--dark-accent); width: 100%; max-width: 450px;
+            padding: 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            position: relative; animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 20px; color: var(--gray); cursor: pointer; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 11px; color: var(--primary); font-weight: 800; margin-bottom: 8px; text-transform: uppercase; }
+        .form-input { width: 100%; background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 10px; color: white; outline: none; }
+
+        @media (min-width: 768px) {
+            .det-spec-grid { grid-template-columns: repeat(4, 1fr); }
+            .other-units-grid { grid-template-columns: repeat(3, 1fr); }
+            .unit-card-img { height: 180px; }
+            .det-hero { min-height: 450px; }
+            .det-action-bar { padding: 20px 150px 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="det-header">
+        <a href="index.html"><i class="fas fa-chevron-left"></i></a>
+        <div class="nav-title">Informasi Produk</div>
+        <a href="#"><i class="far fa-bookmark"></i></a>
+    </header>
+
+    <div class="main-content">
+        <section class="det-hero reveal active">
+            <img src="img/mobil4.png" alt="Star Air Pro">
+            <div class="det-bullets">
+                <span class="det-dot active"></span>
+                <span class="det-dot"></span>
+                <span class="det-dot"></span>
+            </div>
+        </section>
+
+        <div class="det-main-info">
+            <div class="reveal reveal-up active">
+                <span class="det-tag">⚡ CITY EV - Best Choice</span>
+                <h1 class="det-title">Star Air Pro</h1>
+                <p class="det-price">Rp 295.000.000</p>
+            </div>
+
+            <div class="det-spec-grid">
+                <div class="det-spec-item reveal reveal-up active">
+                    <i class="fas fa-bolt"></i>
+                    <span>Range</span>
+                    <strong>300 KM</strong>
+                </div>
+                <div class="det-spec-item reveal reveal-up active">
+                    <i class="fas fa-charging-station"></i>
+                    <span>Charging</span>
+                    <strong>Easy Home</strong>
+                </div>
+                <div class="det-spec-item reveal reveal-up active">
+                    <i class="fas fa-magic"></i>
+                    <span>Control</span>
+                    <strong>Voice Cmd</strong>
+                </div>
+                <div class="det-spec-item reveal reveal-up active">
+                    <i class="fas fa-parking"></i>
+                    <span>Park</span>
+                    <strong>Auto Assist</strong>
+                </div>
+            </div>
+
+            <div class="reveal reveal-up active">
+                <div class="det-tabs-nav">
+                    <button class="tab-link active" onclick="openTab(event, 'desc')">Deskripsi</button>
+                    <button class="tab-link" onclick="openTab(event, 'tech')">Teknis</button>
+                </div>
+
+                <div id="desc" class="tab-pane active">
+                    <p>Star Air Pro adalah solusi mobilitas perkotaan yang cerdas. Dengan desain compact yang ikonik, mobil ini memudahkan Anda bermanuver di jalanan sempit namun tetap menawarkan fitur teknologi modern yang lengkap.</p>
+                </div>
+                <div id="tech" class="tab-pane">
+                    <p>Baterai 30 kWh, Motor listrik efisien, sistem pengisian daya rumahan (Home Charging), serta radius putar yang sangat kecil untuk kelincahan maksimal.</p>
+                </div>
+            </div>
+
+            <section class="other-units-section reveal reveal-up active">
+                <h3 class="other-units-title">Koleksi Bintang Lainnya</h3>
+                <div class="other-units-grid">
+                    
+                    <a href="detailkatalog1.html" class="unit-card">
+                        <div class="unit-card-img">
+                            <img src="img/mobil3.png" alt="Star Cloud EV Plus">
+                        </div>
+                        <div class="unit-card-info">
+                            <h4>Star Cloud EV Plus</h4>
+                            <p>Rp 415.000.000</p>
+                        </div>
+                    </a>
+
+                    <a href="detailkatalog3.html" class="unit-card">
+                        <div class="unit-card-img">
+                            <img src="img/mobil5.png" alt="Prestige X-SUV">
+                        </div>
+                        <div class="unit-card-info">
+                            <h4>Prestige X-SUV</h4>
+                            <p>Rp 1.150.000.000</p>
+                        </div>
+                    </a>
+
+                    <a href="detailkatalog4.html" class="unit-card">
+                        <div class="unit-card-img">
+                            <img src="img/mobil6.png" alt="Royal Star MPV">
+                        </div>
+                        <div class="unit-card-info">
+                            <h4>Royal Star MPV</h4>
+                            <p>Rp 890.000.000</p>
+                        </div>
+                    </a>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="det-action-bar">
+        <a href="https://wa.me/628123456789" class="btn-icon-wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="book-testdrive.html" class="btn-action-outline">TEST DRIVE</a>
+        <button class="btn-action-primary" onclick="toggleModal()">Pesan Sekarang</button>
+    </div>
+
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-card">
+            <span class="modal-close" onclick="toggleModal()">&times;</span>
+            <h2 style="color: white; font-weight: 900;">Reservasi Unit</h2>
+            <p style="font-size: 13px; color: var(--gray); margin-bottom: 25px;">Lengkapi data diri untuk pemesanan resmi.</p>
+            <form id="waForm">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="name" class="form-input" placeholder="Nama sesuai KTP..." required>
+                </div>
+                <div class="form-group">
+                    <label>Warna Unit</label>
+                    <select id="color" class="form-input">
+                        <option>Avocado Green</option>
+                        <option>Peach Pink</option>
+                        <option>Galaxy White</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-action-primary" style="width: 100%; border-radius: 10px; height: 60px;">Kirim Pesanan Ke WA</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabId) {
+            const panes = document.getElementsByClassName("tab-pane");
+            for (let p of panes) p.classList.remove("active");
+            const links = document.getElementsByClassName("tab-link");
+            for (let l of links) l.classList.remove("active");
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function toggleModal() {
+            document.getElementById('orderModal').classList.toggle('active');
+        }
+
+        document.getElementById('waForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const color = document.getElementById('color').value;
+            const msg = `Halo Dealer Star, saya sangat tertarik memesan:
+*Unit:* Star Air Pro
+*Nama:* ${name}
+*Warna:* ${color}
+Mohon info ketersediaan stok. Terima kasih.`;
+            window.open(`https://wa.me/628123456789?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+
+        window.addEventListener('scroll', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) el.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
