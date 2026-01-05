@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Star - Katalog Eksklusif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e67e22;
+            --primary-light: #ff9d47;
+            --dark: #0a0a0a;
+            --dark-accent: #141414;
+            --light: #f8f9fa;
+            --gray: #888;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body { background: var(--white); color: #333; line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 25px; }
+
+        /* --- Animations --- */
+        .reveal { opacity: 0; transition: all 0.8s ease-out; }
+        .reveal-up { transform: translateY(50px); }
+        .reveal-left { transform: translateX(-50px); }
+        .reveal-right { transform: translateX(50px); }
+        .active { opacity: 1; transform: translate(0) scale(1); }
+
+        /* --- Navbar (Identik dengan Index) --- */
+        header {
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li a { color: #ccc; text-decoration: none; margin: 0 18px; font-size: 13px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+        
+        .btn-filled {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+            display: inline-block;
+        }
+
+        /* --- Katalog Page Scoped Styles --- */
+        .catalog-page-wrapper { background: var(--white); padding-bottom: 80px; }
+        
+        .cat-hero {
+            background: radial-gradient(circle at bottom right, #1a2a3a, #000000);
+            padding: 80px 0 60px;
+            color: white;
+        }
+        .cat-breadcrumb { font-size: 12px; color: #666; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .cat-breadcrumb span { color: var(--primary); font-weight: 700; }
+        .cat-hero h1 { font-size: 42px; font-weight: 900; }
+        .cat-hero h1 span { color: var(--primary); }
+        .cat-hero p { color: #bbb; max-width: 600px; margin-top: 10px; }
+
+        .cat-flex-container { display: flex; gap: 40px; margin-top: -40px; position: relative; z-index: 5; }
+        
+        /* Sidebar */
+        .cat-sidebar { flex: 1; min-width: 300px; }
+        .cat-filter-box { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; position: sticky; top: 100px; }
+        .cat-filter-title { font-weight: 900; text-transform: uppercase; margin-bottom: 25px; border-bottom: 2px solid var(--primary); display: inline-block; }
+        .cat-filter-group { margin-bottom: 25px; }
+        .cat-filter-group label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+        
+        .cat-search-input { position: relative; }
+        .cat-search-input input { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+        .cat-search-input i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
+        
+        .cat-checkbox-list { display: flex; flex-direction: column; gap: 10px; }
+        .cat-check-item { font-weight: 500 !important; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        
+        .cat-price-slider { width: 100%; accent-color: var(--primary); cursor: pointer; }
+        .cat-price-labels { display: flex; justify-content: space-between; font-size: 12px; color: #999; margin-top: 5px; }
+        
+        .cat-btn-reset { width: 100%; background: none; border: 1px dashed #ccc; padding: 10px; border-radius: 8px; color: #999; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .cat-btn-reset:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* Grid */
+        .cat-grid-area { flex: 3; }
+        .cat-grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 10px 0; }
+        .cat-product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+
+        /* Product Card */
+        .cat-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: var(--transition); position: relative; display: flex; flex-direction: column; }
+        .cat-card.hidden { display: none; }
+        .cat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .cat-card-tag { position: absolute; top: 15px; left: 15px; background: var(--dark); color: white; padding: 4px 12px; font-size: 10px; font-weight: 800; border-radius: 4px; z-index: 2; letter-spacing: 1px; }
+        
+        .cat-card-img { height: 240px; padding: 20px; background: radial-gradient(circle, #fcfcfc, #f3f3f3); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .cat-card-img img { width: 100%; object-fit: contain; transition: 0.5s; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+        .cat-card:hover .cat-card-img img { transform: scale(1.1) translateX(10px); }
+        
+        .cat-card-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cat-card-info h3 { font-size: 20px; font-weight: 900; color: var(--dark); }
+        .cat-card-price { color: var(--primary); font-size: 22px; font-weight: 900; margin: 8px 0; }
+        .cat-card-desc { font-size: 13px; color: #777; margin-bottom: 15px; line-height: 1.5; height: 40px; overflow: hidden; }
+        
+        .cat-card-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .cat-btn-card-outline { border: 1px solid #ddd; text-align: center; text-decoration: none; color: var(--dark); padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; transition: 0.3s; }
+        .cat-btn-card-primary { background: var(--dark); color: white; text-align: center; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; transition: 0.3s; }
+        .cat-btn-card-primary:hover { background: var(--primary); }
+
+        /* Footer */
+        footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; }
+        .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); }
+        .footer-col ul li { list-style: none; margin-bottom: 12px; }
+        .footer-col ul li a { color: #666; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: white; padding-left: 5px; }
+
+        @media (max-width: 992px) {
+            .cat-flex-container { flex-direction: column; }
+            .cat-product-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">DEALER<span>STAR</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="book.html">Book Test Drive</a></li>
+                    <li><a href="blog.html">Artikel</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="https://wa.me/628123456789" class="btn-filled">Kontak Eksklusif</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="catalog-page-wrapper">
+        <section class="cat-hero reveal reveal-up">
+            <div class="container">
+                <div class="cat-hero-content">
+                    <nav class="cat-breadcrumb">Beranda / <span>Katalog Mobil</span></nav>
+                    <h1>ALL STAR <span>COLLECTION</span></h1>
+                    <p>Temukan kendaraan premium yang dirancang untuk performa dan prestise tanpa kompromi.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cat-main-content">
+            <div class="container cat-flex-container">
+                <aside class="cat-sidebar reveal reveal-left">
+                    <div class="cat-filter-box">
+                        <h4 class="cat-filter-title">Filter Pencarian</h4>
+                        
+                        <div class="cat-filter-group">
+                            <label>Cari Mobil</label>
+                            <div class="cat-search-input">
+                                <input type="text" id="catSearch" placeholder="Ketik nama mobil...">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+
+                        <div class="cat-filter-group">
+                            <label>Kategori</label>
+                            <div class="cat-checkbox-list">
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="EV" checked> Electric Vehicle</label>
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="SUV" checked> Prestige SUV</label>
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="MPV" checked> Luxury MPV</label>
+                            </div>
+                        </div>
+
+                        <div class="cat-filter-group">
+                            <label>Harga Maks: <span id="priceVal" style="color: var(--primary);">1.5 Miliar</span></label>
+                            <input type="range" id="priceRange" class="cat-price-slider" min="200" max="1500" step="50" value="1500">
+                            <div class="cat-price-labels"><span>200jt</span><span>1.5M+</span></div>
+                        </div>
+
+                        <button class="cat-btn-reset" id="resetFilters">Reset Semua Filter</button>
+                    </div>
+                </aside>
+
+                <main class="cat-grid-area">
+                    <div class="cat-grid-header reveal reveal-up">
+                        <p>Ditemukan: <strong id="unitCount">4</strong> Unit</p>
+                        
+                    </div>
+
+                    <div class="cat-product-grid" id="productGrid">
+                        <div class="cat-card reveal reveal-up" data-name="Star Cloud EV Plus" data-cat="EV" data-price="415">
+                            <div class="cat-card-tag">EV SERIES</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil3.png" alt="Star Cloud EV Plus" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+3'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Star Cloud EV Plus</h3>
+                                <h4 class="cat-card-price">Rp 415.000.000</h4>
+                                <p class="cat-card-desc">Jarak tempuh 500KM, Fast charging 30 menit, Panoramic Sunroof, ADAS Lvl 2.</p>
+                                <div class="cat-card-btns">
+                                    <a href="#" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Star Cloud EV Plus" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-card reveal reveal-up" data-name="Star Air Pro" data-cat="EV" data-price="295">
+                            <div class="cat-card-tag">CITY EV</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil4.png" alt="Star Air Pro" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+4'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Star Air Pro</h3>
+                                <h4 class="cat-card-price">Rp 295.000.000</h4>
+                                <p class="cat-card-desc">Compact design, 300KM range, Intelligent voice command, Easy parking assist.</p>
+                                <div class="cat-card-btns">
+                                    <a href="#" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Star Air Pro" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-card reveal reveal-up" data-name="Prestige X-SUV" data-cat="SUV" data-price="1150">
+                            <div class="cat-card-tag">PRESTIGE SUV</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil5.png" alt="Prestige X-SUV" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+5'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Prestige X-SUV</h3>
+                                <h4 class="cat-card-price">Rp 1.150.000.000</h4>
+                                <p class="cat-card-desc">V6 Twin Turbo, AWD System, Premium Nappa Leather, 21-inch Alloy Wheels.</p>
+                                <div class="cat-card-btns">
+                                    <a href="#" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Prestige X-SUV" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cat-card reveal reveal-up" data-name="Royal Star MPV" data-cat="MPV" data-price="890">
+                            <div class="cat-card-tag">FAMILY ROYAL</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil6.png" alt="Royal Star MPV" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+6'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Royal Star MPV</h3>
+                                <h4 class="cat-card-price">Rp 890.000.000</h4>
+                                <p class="cat-card-desc">Captain seat with massage, Dual zone AC, Premium sound system, Power sliding door.</p>
+                                <div class="cat-card-btns">
+                                    <a href="#" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Royal Star MPV" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col reveal reveal-up">
+                <div class="logo">DEALER<span>STAR</span></div>
+                <p style="margin-top: 20px;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi.</p>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Katalog Unit</a></li>
+                    <li><a href="#">Simulasi Kredit</a></li>
+                </ul>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Hubungi Kami</h4>
+                <p style="color: #666; font-size: 14px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
+                <p style="color: #666; font-size: 14px; margin-top: 10px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> concierge@dealerstar.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data & Filter Logic
+        const searchInput = document.getElementById('catSearch');
+        const priceRange = document.getElementById('priceRange');
+        const priceDisplay = document.getElementById('priceVal');
+        const checkboxes = document.querySelectorAll('.cat-filter-check');
+        const products = document.querySelectorAll('.cat-card');
+        const unitCount = document.getElementById('unitCount');
+        const btnReset = document.getElementById('resetFilters');
+
+        function filterProducts() {
+            const query = searchInput.value.toLowerCase();
+            const maxPrice = parseInt(priceRange.value);
+            const activeCats = Array.from(checkboxes).filter(i => i.checked).map(i => i.value);
+            
+            let visibleCount = 0;
+
+            products.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const cat = card.getAttribute('data-cat');
+                const price = parseInt(card.getAttribute('data-price'));
+
+                const matchSearch = name.includes(query);
+                const matchCat = activeCats.includes(cat);
+                const matchPrice = price <= maxPrice;
+
+                if (matchSearch && matchCat && matchPrice) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            unitCount.innerText = visibleCount;
+            priceDisplay.innerText = maxPrice >= 1500 ? "1.5 Miliar+" : maxPrice + " Juta";
+        }
+
+        // Listeners
+        searchInput.addEventListener('input', filterProducts);
+        priceRange.addEventListener('input', filterProducts);
+        checkboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+
+        btnReset.addEventListener('click', () => {
+            searchInput.value = '';
+            priceRange.value = 1500;
+            checkboxes.forEach(cb => cb.checked = true);
+            filterProducts();
+        });
+
+        // Animasi Reveal On Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.onload = () => {
+            filterProducts(); 
+            reveal();
+        };
+    </script>
+</body>
+</html>
