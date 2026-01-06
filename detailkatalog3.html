@@ -31,27 +31,53 @@
         .active { opacity: 1; transform: translateY(0); }
 
         /* --- Navbar --- */
-        .det-header {
-            position: sticky; top: 0; z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(15px);
-            min-height: 70px;
-            padding: 0 20px;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
+        header {
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .det-header .nav-title {
-            font-weight: 800; font-size: 14px;
-            text-transform: uppercase; letter-spacing: 2px;
+        .nav-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo img { 
+            height: 70px; 
+            width: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        nav ul { display: flex; list-style: none; }
+        nav ul li a { color: #ccc; text-decoration: none; margin: 0 18px; font-size: 13px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); }
+        
+        .menu-toggle {
+            display: none;
             color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            order: 2;
         }
-        .det-header a { 
-            color: white; width: 40px; height: 40px; 
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; font-size: 18px; 
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
+            display: inline-block;
         }
+        .btn-filled:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.5); }
 
         /* --- Hero Area (Anti-Gepeng) --- */
         .det-hero {
@@ -173,14 +199,47 @@
             .det-hero { min-height: 450px; }
             .det-action-bar { padding: 20px 150px 30px; }
         }
+                /* --- Footer --- */
+        footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); font-size: 16px; }
+        .footer-col ul li { list-style: none; margin-bottom: 12px; }
+        .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
+        /* REVISI UKURAN LOGO FOOTER */
+        .footer-logo {
+            height: 80px; /* Diperbesar dari 40px */
+            width: auto;
+            margin-bottom: 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
 
-    <header class="det-header">
-        <a href="index.html"><i class="fas fa-chevron-left"></i></a>
-        <div class="nav-title">Informasi Produk</div>
-        <a href="#"><i class="far fa-bookmark"></i></a>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.jpeg" alt="Dealer Star Logo"></a>
+            </div>
+
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="book.html">Book Test Drive</a></li>
+                    <li><a href="blog.html">Artikel</a></li>
+                </ul>
+            </nav>
+
+            <div class="auth-buttons">
+                <a href="https://wa.me/628123456789" class="btn-filled">Kontak Eksklusif</a>
+            </div>
+        </div>
     </header>
 
     <div class="main-content">
@@ -304,6 +363,39 @@
             </form>
         </div>
     </div>
+
+            <footer>
+        <div class="container footer-grid">
+            <div class="footer-col reveal reveal-up">
+                <img src="img/logo.jpeg" class="footer-logo" alt="Logo">
+                <p style="font-size: 14px; color: #888;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi dan standar internasional.</p>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Katalog Unit</a></li>
+                    <li><a href="#">Booking Service</a></li>
+                    <li><a href="#">Tukar Tambah</a></li>
+                    <li><a href="#">Promo Terbaru</a></li>
+                </ul>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#">Test Drive di Rumah</a></li>
+                    <li><a href="#">Asuransi Kendaraan</a></li>
+                    <li><a href="#">Suku Cadang Asli</a></li>
+                    <li><a href="#">Bantuan Darurat</a></li>
+                </ul>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Kontak</h4>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> Sudirman Central Business, Jakarta</p>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
+                <p style="color: #888; font-size: 14px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> info@dealerstar.co.id</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function openTab(evt, tabId) {
