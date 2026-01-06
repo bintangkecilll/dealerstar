@@ -26,7 +26,7 @@
         body { background: var(--dark); color: #ccc; line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1300px; margin: 0 auto; padding: 0 25px; }
 
-        /* --- Animations (Reveal System) --- */
+        /* --- Animations --- */
         .reveal { opacity: 0; transition: all 0.8s ease-out; }
         .reveal-up { transform: translateY(50px); }
         .reveal-left { transform: translateX(-50px); }
@@ -37,7 +37,7 @@
         header {
             background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
-            padding: 10px 0; /* Padding sedikit dikurangi untuk mengimbangi logo yang membesar */
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -48,9 +48,8 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        /* REVISI UKURAN LOGO NAVBAR */
         .logo img { 
-            height: 140px; /* Diperbesar dari 40px */
+            height: 70px; /* Ukuran proporsional desktop */
             width: auto;
             display: block;
             transition: var(--transition);
@@ -170,7 +169,6 @@
             box-shadow: 0 0 15px rgba(230, 126, 34, 0.2);
         }
 
-        /* Custom Radio Buttons untuk Lokasi */
         .book-radio-group { display: flex; gap: 20px; }
         .book-radio-item { flex: 1; position: relative; }
         .book-radio-item input { display: none; }
@@ -226,18 +224,60 @@
         .footer-col ul li { list-style: none; margin-bottom: 12px; }
         .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
-        /* REVISI UKURAN LOGO FOOTER */
-        .footer-logo {
-            height: 80px; /* Diperbesar dari 40px */
-            width: auto;
-            margin-bottom: 20px;
-            display: block;
+        .footer-logo { height: 80px; width: auto; margin-bottom: 20px; display: block; }
+
+        /* ==========================================================================
+            RESPONSIVE REVISIONS
+           ========================================================================== */
+
+        @media (max-width: 992px) {
+            .logo img { height: 60px; }
+            .book-hero-text { text-align: center; }
+            .book-hero-text h1 { font-size: 36px; }
+            
+            /* REVISI: FORM DI ATAS, MOBIL/INFO DI BAWAH */
+            .book-flex-layout { 
+                flex-direction: column-reverse; 
+                gap: 40px; 
+            }
+            .book-form-side, .book-info-side { width: 100%; }
+            .book-card-form { padding: 30px 20px; }
+            
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .logo img { height: 55px; }
+            .auth-buttons { order: 3; }
+            .logo { order: 1; }
+
+            nav {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #0a0a0a;
+                max-height: 0;
+                overflow: hidden;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            nav.active { max-height: 400px; border-bottom: 3px solid var(--primary); }
+            nav ul { flex-direction: column; padding: 20px; text-align: center; }
+            nav ul li { margin: 15px 0; }
+
+            /* Stacking input baris (Tanggal & Jam) */
+            .book-row { flex-direction: column; gap: 0; }
+
+            .footer-grid { grid-template-columns: 1fr; text-align: left; }
+            .footer-logo { height: 60px; }
         }
     </style>
 </head>
 <body>
 
-   <header>
+    <header>
         <div class="container nav-container">
             <div class="logo">
                 <a href="index.html"><img src="img/logo navbar.png" alt="Dealer Star Logo"></a>
@@ -249,9 +289,9 @@
 
             <nav id="nav-menu">
                 <ul>
-                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="index.html">Beranda</a></li>
                     <li><a href="katalog.html">Katalog</a></li>
-                    <li><a href="book.html">Book Test Drive</a></li>
+                    <li><a href="book.html" class="active">Book Test Drive</a></li>
                     <li><a href="blog.html">Artikel</a></li>
                 </ul>
             </nav>
@@ -377,7 +417,7 @@
             <div class="footer-col reveal reveal-up">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="#">Katalog Unit</a></li>
+                    <li><a href="katalog.html">Katalog Unit</a></li>
                     <li><a href="#">Booking Service</a></li>
                     <li><a href="#">Tukar Tambah</a></li>
                     <li><a href="#">Promo Terbaru</a></li>
@@ -386,7 +426,7 @@
             <div class="footer-col reveal reveal-up">
                 <h4>Layanan</h4>
                 <ul>
-                    <li><a href="#">Test Drive di Rumah</a></li>
+                    <li><a href="book.html">Test Drive di Rumah</a></li>
                     <li><a href="#">Asuransi Kendaraan</a></li>
                     <li><a href="#">Suku Cadang Asli</a></li>
                     <li><a href="#">Bantuan Darurat</a></li>
@@ -401,13 +441,17 @@
         </div>
     </footer>
 
-
     <script>
+        // Navbar Toggle Function
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
+        }
+
         // Logika Pengiriman WhatsApp
         document.getElementById('testDriveForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Ambil data dari form
             const car = document.getElementById('carModel').value;
             const location = document.querySelector('input[name="location"]:checked').value;
             const date = document.getElementById('testDate').value;
@@ -415,27 +459,15 @@
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
 
-            // Format Pesan WhatsApp
-            const message = `Halo Dealer Star, saya ingin melakukan *Book Test Drive* eksklusif.
-            
-Berikut data reservasi saya:
-*Nama:* ${name}
-*No. WhatsApp:* ${phone}
-*Unit Mobil:* ${car}
-*Lokasi Uji Coba:* ${location}
-*Jadwal:* ${date} pukul ${time}
+            const message = `Halo Dealer Star, saya ingin melakukan *Book Test Drive* eksklusif.\n\nBerikut data reservasi saya:\n*Nama:* ${name}\n*No. WhatsApp:* ${phone}\n*Unit Mobil:* ${car}\n*Lokasi Uji Coba:* ${location}\n*Jadwal:* ${date} pukul ${time}\n\nMohon konfirmasi ketersediaan jadwal tersebut. Terima kasih.`;
 
-Mohon konfirmasi ketersediaan jadwal tersebut. Terima kasih.`;
-
-            // Encode pesan untuk URL
             const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "628123456789"; // Ganti dengan nomor dealer asli
+            const whatsappNumber = "628123456789"; 
 
-            // Alihkan ke WhatsApp
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
         });
 
-        // Script Animasi Reveal
+        // Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
