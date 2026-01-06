@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealer Star - Book Test Drive Eksklusif</title>
+    <title>Dealer Star - Katalog Eksklusif</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -11,8 +11,10 @@
             --primary-light: #ff9d47;
             --dark: #0a0a0a;
             --dark-accent: #141414;
+            --light: #f8f9fa;
+            --gray: #888;
             --white: #ffffff;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -23,15 +25,15 @@
             scroll-behavior: smooth;
         }
 
-        body { background: var(--dark); color: #ccc; line-height: 1.6; overflow-x: hidden; }
+        body { background: var(--white); color: #333; line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1300px; margin: 0 auto; padding: 0 25px; }
 
-        /* --- Animations (Reveal System) --- */
+        /* --- Animations --- */
         .reveal { opacity: 0; transition: all 0.8s ease-out; }
         .reveal-up { transform: translateY(50px); }
         .reveal-left { transform: translateX(-50px); }
         .reveal-right { transform: translateX(50px); }
-        .active { opacity: 1; transform: translate(0); }
+        .active { opacity: 1; transform: translate(0) scale(1); }
 
         /* --- Navbar --- */
         header {
@@ -83,141 +85,66 @@
         }
         .btn-filled:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.5); }
 
-        /* --- Book Test Drive Page Styles --- */
-        .book-wrapper {
-            background: radial-gradient(circle at top left, #1a2a3a, #000000);
-            min-height: 100vh;
-            padding: 60px 0 100px;
-        }
-
-        .book-hero-text { margin-bottom: 60px; }
-        .book-hero-text h1 { font-size: 48px; color: white; font-weight: 900; text-transform: uppercase; }
-        .book-hero-text h1 span { color: var(--primary); }
-
-        .book-flex-layout {
-            display: flex;
-            gap: 60px;
-            align-items: flex-start;
-        }
-
-        /* Sisi Kiri: Benefits */
-        .book-info-side { flex: 1; }
-        .book-benefit-item {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .book-benefit-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(230, 126, 34, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        .book-benefit-text h4 { color: white; font-size: 18px; margin-bottom: 5px; text-transform: uppercase; }
-        .book-benefit-text p { font-size: 14px; color: #888; }
-
-        .book-image-decor {
-            margin-top: 50px;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .book-image-decor img { width: 100%; display: block; filter: grayscale(0.5) contrast(1.2); }
-
-        /* Sisi Kanan: Premium Form */
-        .book-form-side { flex: 1.5; }
-        .book-card-form {
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(20px);
-            padding: 50px;
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-        }
-
-        .book-form-group { margin-bottom: 25px; }
-        .book-form-group label {
-            display: block;
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .book-input, .book-select {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px 20px;
-            border-radius: 8px;
+        /* --- Katalog Page Scoped Styles --- */
+        .catalog-page-wrapper { background: var(--white); padding-bottom: 80px; }
+        
+        .cat-hero {
+            background: radial-gradient(circle at bottom right, #1a2a3a, #000000);
+            padding: 80px 0 60px;
             color: white;
-            outline: none;
-            transition: 0.3s;
-            font-size: 15px;
         }
-        .book-input:focus, .book-select:focus {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 0 15px rgba(230, 126, 34, 0.2);
-        }
+        .cat-breadcrumb { font-size: 12px; color: #666; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .cat-breadcrumb span { color: var(--primary); font-weight: 700; }
+        .cat-hero h1 { font-size: 42px; font-weight: 900; }
+        .cat-hero h1 span { color: var(--primary); }
+        .cat-hero p { color: #bbb; max-width: 600px; margin-top: 10px; }
 
-        /* Custom Radio Buttons untuk Lokasi */
-        .book-radio-group { display: flex; gap: 20px; }
-        .book-radio-item { flex: 1; position: relative; }
-        .book-radio-item input { display: none; }
-        .book-radio-item label {
-            display: block;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
-            color: #666;
-        }
-        .book-radio-item input:checked + label {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+        .cat-flex-container { display: flex; gap: 40px; margin-top: -40px; position: relative; z-index: 5; }
+        
+        /* Sidebar */
+        .cat-sidebar { flex: 1; min-width: 300px; }
+        .cat-filter-box { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; position: sticky; top: 100px; }
+        .cat-filter-title { font-weight: 900; text-transform: uppercase; margin-bottom: 25px; border-bottom: 2px solid var(--primary); display: inline-block; }
+        .cat-filter-group { margin-bottom: 25px; }
+        .cat-filter-group label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+        
+        .cat-search-input { position: relative; }
+        .cat-search-input input { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+        .cat-search-input i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--primary); }
+        
+        .cat-checkbox-list { display: flex; flex-direction: column; gap: 10px; }
+        .cat-check-item { font-weight: 500 !important; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        
+        .cat-price-slider { width: 100%; accent-color: var(--primary); cursor: pointer; }
+        .cat-price-labels { display: flex; justify-content: space-between; font-size: 12px; color: #999; margin-top: 5px; }
+        
+        .cat-btn-reset { width: 100%; background: none; border: 1px dashed #ccc; padding: 10px; border-radius: 8px; color: #999; font-weight: 600; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .cat-btn-reset:hover { border-color: var(--primary); color: var(--primary); }
 
-        .book-row { display: flex; gap: 20px; }
-        .book-row > div { flex: 1; }
+        /* Grid */
+        .cat-grid-area { flex: 3; }
+        .cat-grid-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 10px 0; }
+        .cat-product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
 
-        .book-btn-submit {
-            width: 100%;
-            padding: 20px;
-            background: var(--primary);
-            border: none;
-            color: white;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.4s;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .book-btn-submit:hover {
-            background: var(--primary-light);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(230, 126, 34, 0.4);
-        }
+        /* Product Card */
+        .cat-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: var(--transition); position: relative; display: flex; flex-direction: column; }
+        .cat-card.hidden { display: none; }
+        .cat-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .cat-card-tag { position: absolute; top: 15px; left: 15px; background: var(--dark); color: white; padding: 4px 12px; font-size: 10px; font-weight: 800; border-radius: 4px; z-index: 2; letter-spacing: 1px; }
+        
+        .cat-card-img { height: 240px; padding: 20px; background: radial-gradient(circle, #fcfcfc, #f3f3f3); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .cat-card-img img { width: 100%; object-fit: contain; transition: 0.5s; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+        .cat-card:hover .cat-card-img img { transform: scale(1.1) translateX(10px); }
+        
+        .cat-card-info { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .cat-card-info h3 { font-size: 20px; font-weight: 900; color: var(--dark); }
+        .cat-card-price { color: var(--primary); font-size: 22px; font-weight: 900; margin: 8px 0; }
+        .cat-card-desc { font-size: 13px; color: #777; margin-bottom: 15px; line-height: 1.5; height: 40px; overflow: hidden; }
+        
+        .cat-card-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .cat-btn-card-outline { border: 1px solid #ddd; text-align: center; text-decoration: none; color: var(--dark); padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; transition: 0.3s; }
+        .cat-btn-card-primary { background: var(--dark); color: white; text-align: center; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; transition: 0.3s; }
+        .cat-btn-card-primary:hover { background: var(--primary); }
 
         /* --- Footer --- */
         footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
@@ -262,110 +189,124 @@
         </div>
     </header>
 
-    <div class="book-wrapper">
-        <div class="container">
-            
-            <div class="book-hero-text reveal reveal-up">
-                <nav style="font-size: 12px; color: #666; margin-bottom: 10px; text-transform: uppercase;">Beranda / Test Drive</nav>
-                <h1>Experience The <span>Star Performance</span></h1>
-                <p>Rasakan langsung sensasi kemewahan dan teknologi mutakhir dari koleksi terbaik kami.</p>
+    <div class="catalog-page-wrapper">
+        <section class="cat-hero reveal reveal-up">
+            <div class="container">
+                <div class="cat-hero-content">
+                    <nav class="cat-breadcrumb">Beranda / <span>Katalog Mobil</span></nav>
+                    <h1>ALL STAR <span>COLLECTION</span></h1>
+                    <p>Temukan kendaraan premium yang dirancang untuk performa dan prestise tanpa kompromi.</p>
+                </div>
             </div>
+        </section>
 
-            <div class="book-flex-layout">
-                
-                <aside class="book-info-side">
-                    <div class="book-benefit-item reveal reveal-left">
-                        <div class="book-benefit-icon"><i class="fas fa-user-tie"></i></div>
-                        <div class="book-benefit-text">
-                            <h4>Pendamping Profesional</h4>
-                            <p>Konsultan produk kami akan menjelaskan setiap fitur detail selama perjalanan Anda.</p>
+        <section class="cat-main-content">
+            <div class="container cat-flex-container">
+                <aside class="cat-sidebar reveal reveal-left">
+                    <div class="cat-filter-box">
+                        <h4 class="cat-filter-title">Filter Pencarian</h4>
+                        
+                        <div class="cat-filter-group">
+                            <label>Cari Mobil</label>
+                            <div class="cat-search-input">
+                                <input type="text" id="catSearch" placeholder="Ketik nama mobil...">
+                                <i class="fas fa-search"></i>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="book-benefit-item reveal reveal-left" style="transition-delay: 0.2s;">
-                        <div class="book-benefit-icon"><i class="fas fa-map-marked-alt"></i></div>
-                        <div class="book-benefit-text">
-                            <h4>Rute Fleksibel</h4>
-                            <p>Pilih rute uji coba yang paling sesuai untuk menguji performa mesin dan kenyamanan suspensi.</p>
+                        <div class="cat-filter-group">
+                            <label>Kategori</label>
+                            <div class="cat-checkbox-list">
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="EV" checked> Electric Vehicle</label>
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="SUV" checked> Prestige SUV</label>
+                                <label class="cat-check-item"><input type="checkbox" class="cat-filter-check" value="MPV" checked> Luxury MPV</label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="book-benefit-item reveal reveal-left" style="transition-delay: 0.4s;">
-                        <div class="book-benefit-icon"><i class="fas fa-home"></i></div>
-                        <div class="book-benefit-text">
-                            <h4>Layanan Antar Rumah</h4>
-                            <p>Sibuk? Kami bawakan unit impian Anda langsung ke depan pintu rumah atau kantor Anda.</p>
+                        <div class="cat-filter-group">
+                            <label>Harga Maks: <span id="priceVal" style="color: var(--primary);">1.5 Miliar</span></label>
+                            <input type="range" id="priceRange" class="cat-price-slider" min="200" max="1500" step="50" value="1500">
+                            <div class="cat-price-labels"><span>200jt</span><span>1.5M+</span></div>
                         </div>
-                    </div>
 
-                    <div class="book-image-decor reveal reveal-zoom">
-                        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800" alt="Interior Luxury">
+                        <button class="cat-btn-reset" id="resetFilters">Reset Semua Filter</button>
                     </div>
                 </aside>
 
-                <main class="book-form-side reveal reveal-right">
-                    <form class="book-card-form" id="testDriveForm">
+                <main class="cat-grid-area">
+                    <div class="cat-grid-header reveal reveal-up">
+                        <p>Ditemukan: <strong id="unitCount">4</strong> Unit</p>
                         
-                        <div class="book-form-group">
-                            <label>Pilih Model Kendaraan</label>
-                            <select class="book-select" id="carModel" required>
-                                <option value="" disabled selected>Pilih unit yang ingin dicoba...</option>
-                                <option value="Star Cloud EV Plus">Star Cloud EV Plus (Electric)</option>
-                                <option value="Star Air Pro">Star Air Pro (City EV)</option>
-                                <option value="Prestige X-SUV">Prestige X-SUV (Prestige SUV)</option>
-                                <option value="Royal Star MPV">Royal Star MPV (Family Royal)</option>
-                            </select>
-                        </div>
+                    </div>
 
-                        <div class="book-form-group">
-                            <label>Lokasi Uji Coba</label>
-                            <div class="book-radio-group">
-                                <div class="book-radio-item">
-                                    <input type="radio" name="location" id="showroom" value="Showroom Dealer Star" checked>
-                                    <label for="showroom">Di Showroom</label>
-                                </div>
-                                <div class="book-radio-item">
-                                    <input type="radio" name="location" id="home" value="Alamat Rumah/Kantor">
-                                    <label for="home">Antar ke Rumah</label>
+                    <div class="cat-product-grid" id="productGrid">
+                        <div class="cat-card reveal reveal-up" data-name="Star Cloud EV Plus" data-cat="EV" data-price="415">
+                            <div class="cat-card-tag">EV SERIES</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil3.png" alt="Star Cloud EV Plus" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+3'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Star Cloud EV Plus</h3>
+                                <h4 class="cat-card-price">Rp 415.000.000</h4>
+                                <p class="cat-card-desc">Jarak tempuh 500KM, Fast charging 30 menit, Panoramic Sunroof, ADAS Lvl 2.</p>
+                                <div class="cat-card-btns">
+                                    <a href="detailkatalog1.html" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Star Cloud EV Plus" class="cat-btn-card-primary">Pesan</a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="book-row">
-                            <div class="book-form-group">
-                                <label>Pilih Tanggal</label>
-                                <input type="date" class="book-input" id="testDate" required>
+                        <div class="cat-card reveal reveal-up" data-name="Star Air Pro" data-cat="EV" data-price="295">
+                            <div class="cat-card-tag">CITY EV</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil4.png" alt="Star Air Pro" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+4'">
                             </div>
-                            <div class="book-form-group">
-                                <label>Pilih Jam</label>
-                                <select class="book-select" id="testTime" required>
-                                    <option value="10:00 WIB">10:00 WIB</option>
-                                    <option value="13:00 WIB">13:00 WIB</option>
-                                    <option value="15:30 WIB">15:30 WIB</option>
-                                </select>
+                            <div class="cat-card-info">
+                                <h3>Star Air Pro</h3>
+                                <h4 class="cat-card-price">Rp 295.000.000</h4>
+                                <p class="cat-card-desc">Compact design, 300KM range, Intelligent voice command, Easy parking assist.</p>
+                                <div class="cat-card-btns">
+                                    <a href="detailkatalog2.html" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Star Air Pro" class="cat-btn-card-primary">Pesan</a>
+                                </div>
                             </div>
                         </div>
 
-                        <hr style="opacity: 0.1; margin-bottom: 25px;">
-
-                        <div class="book-form-group">
-                            <label>Nama Lengkap</label>
-                            <input type="text" class="book-input" id="userName" placeholder="Masukkan nama sesuai ID..." required>
+                        <div class="cat-card reveal reveal-up" data-name="Prestige X-SUV" data-cat="SUV" data-price="1150">
+                            <div class="cat-card-tag">PRESTIGE SUV</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil5.png" alt="Prestige X-SUV" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+5'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Prestige X-SUV</h3>
+                                <h4 class="cat-card-price">Rp 1.150.000.000</h4>
+                                <p class="cat-card-desc">V6 Twin Turbo, AWD System, Premium Nappa Leather, 21-inch Alloy Wheels.</p>
+                                <div class="cat-card-btns">
+                                    <a href="detailkatalog3.html" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Prestige X-SUV" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="book-form-group">
-                            <label>Nomor WhatsApp</label>
-                            <input type="tel" class="book-input" id="userPhone" placeholder="0812xxxx" required>
+                        <div class="cat-card reveal reveal-up" data-name="Royal Star MPV" data-cat="MPV" data-price="890">
+                            <div class="cat-card-tag">FAMILY ROYAL</div>
+                            <div class="cat-card-img">
+                                <img src="img/mobil6.png" alt="Royal Star MPV" onerror="this.src='https://via.placeholder.com/400x250?text=Mobil+6'">
+                            </div>
+                            <div class="cat-card-info">
+                                <h3>Royal Star MPV</h3>
+                                <h4 class="cat-card-price">Rp 890.000.000</h4>
+                                <p class="cat-card-desc">Captain seat with massage, Dual zone AC, Premium sound system, Power sliding door.</p>
+                                <div class="cat-card-btns">
+                                    <a href="detailkatalog4.html" class="cat-btn-card-outline">Detail</a>
+                                    <a href="https://wa.me/628123456789?text=Halo Dealer Star, saya tertarik unit Royal Star MPV" class="cat-btn-card-primary">Pesan</a>
+                                </div>
+                            </div>
                         </div>
-
-                        <button type="submit" class="book-btn-submit">
-                            Konfirmasi Jadwal Bintang <i class="fab fa-whatsapp"></i>
-                        </button>
-                    </form>
+                    </div>
                 </main>
-
             </div>
-        </div>
+        </section>
     </div>
 
     <footer>
@@ -401,41 +342,57 @@
         </div>
     </footer>
 
-
     <script>
-        // Logika Pengiriman WhatsApp
-        document.getElementById('testDriveForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Data & Filter Logic
+        const searchInput = document.getElementById('catSearch');
+        const priceRange = document.getElementById('priceRange');
+        const priceDisplay = document.getElementById('priceVal');
+        const checkboxes = document.querySelectorAll('.cat-filter-check');
+        const products = document.querySelectorAll('.cat-card');
+        const unitCount = document.getElementById('unitCount');
+        const btnReset = document.getElementById('resetFilters');
 
-            // Ambil data dari form
-            const car = document.getElementById('carModel').value;
-            const location = document.querySelector('input[name="location"]:checked').value;
-            const date = document.getElementById('testDate').value;
-            const time = document.getElementById('testTime').value;
-            const name = document.getElementById('userName').value;
-            const phone = document.getElementById('userPhone').value;
-
-            // Format Pesan WhatsApp
-            const message = `Halo Dealer Star, saya ingin melakukan *Book Test Drive* eksklusif.
+        function filterProducts() {
+            const query = searchInput.value.toLowerCase();
+            const maxPrice = parseInt(priceRange.value);
+            const activeCats = Array.from(checkboxes).filter(i => i.checked).map(i => i.value);
             
-Berikut data reservasi saya:
-*Nama:* ${name}
-*No. WhatsApp:* ${phone}
-*Unit Mobil:* ${car}
-*Lokasi Uji Coba:* ${location}
-*Jadwal:* ${date} pukul ${time}
+            let visibleCount = 0;
 
-Mohon konfirmasi ketersediaan jadwal tersebut. Terima kasih.`;
+            products.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const cat = card.getAttribute('data-cat');
+                const price = parseInt(card.getAttribute('data-price'));
 
-            // Encode pesan untuk URL
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "628123456789"; // Ganti dengan nomor dealer asli
+                const matchSearch = name.includes(query);
+                const matchCat = activeCats.includes(cat);
+                const matchPrice = price <= maxPrice;
 
-            // Alihkan ke WhatsApp
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+                if (matchSearch && matchCat && matchPrice) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            unitCount.innerText = visibleCount;
+            priceDisplay.innerText = maxPrice >= 1500 ? "1.5 Miliar+" : maxPrice + " Juta";
+        }
+
+        // Listeners
+        searchInput.addEventListener('input', filterProducts);
+        priceRange.addEventListener('input', filterProducts);
+        checkboxes.forEach(cb => cb.addEventListener('change', filterProducts));
+
+        btnReset.addEventListener('click', () => {
+            searchInput.value = '';
+            priceRange.value = 1500;
+            checkboxes.forEach(cb => cb.checked = true);
+            filterProducts();
         });
 
-        // Script Animasi Reveal
+        // Animasi Reveal On Scroll
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -449,7 +406,10 @@ Mohon konfirmasi ketersediaan jadwal tersebut. Terima kasih.`;
         }
 
         window.addEventListener("scroll", reveal);
-        window.onload = reveal;
+        window.onload = () => {
+            filterProducts(); 
+            reveal();
+        };
     </script>
 </body>
 </html>
