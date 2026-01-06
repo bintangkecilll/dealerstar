@@ -158,26 +158,42 @@
         .filter-item.active { background: var(--dark); color: white; border-color: var(--dark); }
         .filter-item.active img { opacity: 1; filter: brightness(0) invert(1); }
 
+        .carousel-container { overflow: hidden; }
         .carousel-main {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 60px;
+            margin-bottom: 20px; /* dikurangi agar tombol bawah dekat */
         }
+        .carousel-main img { max-width: 100%; height: auto; display: block; }
+
         .side-car { width: 220px; opacity: 0.2; transform: scale(0.8); transition: var(--transition); filter: grayscale(1); cursor: pointer; }
         .center-car { width: 650px; transition: var(--transition); filter: drop-shadow(0 25px 45px rgba(0,0,0,0.15)); }
-        .nav-btn {
-            background: white; border: none; width: 55px; height: 55px; border-radius: 50%;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08); cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; font-size: 18px;
-            flex: 0 0 auto;
-        }
-        .nav-btn:hover { background: var(--primary); color: white; }
 
-        /* >>> REVISI (1) KATALOG MOBILE: pastikan side image tetap terlihat dan tidak melebar <<< */
-        .carousel-container { overflow: hidden; }
-        .carousel-main img { max-width: 100%; height: auto; display: block; }
+        /* >>> REVISI: tombol prev/next katalog dipindah ke bawah gambar (desktop & mobile) <<< */
+        .catalog-nav {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 0 0 60px;
+            flex-wrap: wrap;
+        }
+        .catalog-btn {
+            background: var(--dark);
+            color: var(--white);
+            border: 1px solid rgba(0,0,0,0.15);
+            padding: 12px 26px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .catalog-btn:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-2px); }
 
         .car-info-row {
             display: grid;
@@ -229,7 +245,6 @@
         /* --- Testimonials --- */
         .testimonials { padding: 100px 0; background: var(--dark); color: white; overflow: hidden; }
 
-        /* >>> REVISI (2) TESTIMONI: 1 baris 3 kolom + tombol prev/next, tanpa auto-scroll <<< */
         .testi-slider { position: relative; margin-top: 40px; }
         .testi-viewport { overflow: hidden; width: 100%; }
         .testi-wrapper { 
@@ -246,8 +261,8 @@
             border-radius: 15px; 
             border: 1px solid rgba(255,255,255,0.05);
             transition: 0.3s;
-            width: auto; /* override width lama */
-            flex: 0 0 calc((100% - 60px) / 3); /* 3 kolom */
+            width: auto;
+            flex: 0 0 calc((100% - 60px) / 3);
         }
         .testi-card:hover { border-color: var(--primary); background: #222; }
 
@@ -292,18 +307,14 @@
         .footer-col ul li { list-style: none; margin-bottom: 12px; }
         .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
-        /* REVISI UKURAN LOGO FOOTER */
         .footer-logo {
-            height: 80px; /* Diperbesar dari 40px */
+            height: 80px;
             width: auto;
             margin-bottom: 20px;
             display: block;
         }
 
-        /* ==========================================================================
-            RESPONSIVE REVISIONS
-           ========================================================================== */
-
+        /* ========================================================================== */
         @media (max-width: 992px) {
             .hero-flex { flex-direction: column; text-align: center; }
             .hero-content h1 { font-size: 48px; }
@@ -313,18 +324,10 @@
             .blog-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; }
 
-            /* >>> REVISI (1) KATALOG: jangan hilangkan side-car, buat lebih rapat & proporsional <<< */
             .carousel-main { gap: 12px; }
-            .nav-btn { width: 46px; height: 46px; font-size: 16px; }
             .center-car { width: 100%; max-width: 420px; }
-            .side-car { 
-                width: 130px; 
-                opacity: 0.35; 
-                transform: scale(0.9);
-                filter: grayscale(1);
-            }
+            .side-car { width: 130px; opacity: 0.35; transform: scale(0.9); }
 
-            /* >>> REVISI (2) TESTIMONI: 2 kolom di tablet <<< */
             .testi-card { flex: 0 0 calc((100% - 30px) / 2); }
             .testi-nav.prev { left: -6px; }
             .testi-nav.next { right: -6px; }
@@ -334,7 +337,6 @@
             .menu-toggle { display: block; }
             .auth-buttons { order: 3; }
             .logo { order: 1; }
-            /* LOGO NAVBAR MOBILE SEDIKIT DISESUAIKAN */
             .logo img { height: 55px; } 
             .auth-buttons .btn-filled { padding: 8px 15px; font-size: 10px; }
 
@@ -353,21 +355,12 @@
             nav ul { flex-direction: column; padding: 20px; text-align: center; }
             nav ul li { margin: 15px 0; }
 
-            .blog-grid { 
-                grid-template-columns: 1fr; 
-                gap: 25px; 
-                max-width: 500px; 
-                margin: 40px auto 0; 
-            }
+            .blog-grid { grid-template-columns: 1fr; gap: 25px; max-width: 500px; margin: 40px auto 0; }
             .blog-card img { height: 220px; }
 
-            .footer-grid { 
-                grid-template-columns: 1fr; 
-                gap: 35px;
-                text-align: left; 
-            }
+            .footer-grid { grid-template-columns: 1fr; gap: 35px; text-align: left; }
             .footer-col { padding: 0; }
-            .footer-logo { height: 60px; } /* DISESUAIKAN UNTUK MOBILE */
+            .footer-logo { height: 60px; }
 
             .filter-bar {
                 display: grid;
@@ -382,20 +375,14 @@
 
             .hero-content h1 { font-size: 38px; }
 
-            /* >>> REVISI (1) KATALOG MOBILE: tampil jelas, side image tetap terlihat di samping <<< */
             .carousel-main { gap: 10px; }
-            .nav-btn { width: 40px; height: 40px; font-size: 14px; }
             .center-car { width: 100%; max-width: 260px; }
-            .side-car { 
-                width: 85px; 
-                opacity: 0.45; 
-                transform: scale(0.92);
-                filter: grayscale(1);
-            }
+            .side-car { width: 85px; opacity: 0.45; transform: scale(0.92); }
+
+            .catalog-btn { padding: 10px 18px; font-size: 11px; }
 
             .why-grid { grid-template-columns: 1fr 1fr; }
 
-            /* >>> REVISI (2) TESTIMONI: 1 kolom di mobile <<< */
             .testi-card { flex: 0 0 100%; }
             .testi-nav { width: 44px; height: 44px; }
             .testi-nav.prev { left: -4px; }
@@ -405,11 +392,8 @@
         @media (max-width: 480px) {
             .why-grid { grid-template-columns: 1fr; }
             .filter-item:last-child:nth-child(odd) { width: 100%; }
-
-            /* Katalog extra kecil */
             .center-car { max-width: 230px; }
             .side-car { width: 75px; opacity: 0.5; }
-            .nav-btn { width: 38px; height: 38px; }
         }
     </style>
 </head>
@@ -475,11 +459,15 @@
 
             <div class="carousel-container">
                 <div class="carousel-main">
-                    <button class="nav-btn" onclick="prevCar()"><i class="fas fa-chevron-left"></i></button>
                     <img id="prevImg" class="side-car" src="" alt="" onclick="prevCar()">
                     <img id="mainImg" class="center-car" src="" alt="">
                     <img id="nextImg" class="side-car" src="" alt="" onclick="nextCar()">
-                    <button class="nav-btn" onclick="nextCar()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+
+                <!-- REVISI: tombol dipindah ke bawah gambar -->
+                <div class="catalog-nav">
+                    <button class="catalog-btn" onclick="prevCar()">Perv</button>
+                    <button class="catalog-btn" onclick="nextCar()">Next</button>
                 </div>
 
                 <div class="car-info-row" id="infoRow">
@@ -568,7 +556,6 @@
             <h2 class="section-title" style="color: white;">Kesan <span>Pelanggan</span></h2>
         </div>
 
-        <!-- REVISI (2): Slider manual + 1 baris 3 kolom -->
         <div class="container testi-slider">
             <button class="testi-nav prev" id="testiPrevBtn" onclick="prevTesti()"><i class="fas fa-chevron-left"></i></button>
             <button class="testi-nav next" id="testiNextBtn" onclick="nextTesti()"><i class="fas fa-chevron-right"></i></button>
@@ -741,7 +728,7 @@
         }
 
         /* ==========================
-           REVISI (2): Slider Testimoni manual
+           Slider Testimoni manual
            ========================== */
         let testiIndex = 0;
 
