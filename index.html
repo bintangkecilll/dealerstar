@@ -40,7 +40,7 @@
         header {
             background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
-            padding: 15px 0;
+            padding: 10px 0; /* Padding sedikit dikurangi untuk mengimbangi logo yang membesar */
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -51,10 +51,12 @@
             justify-content: space-between; 
             align-items: center; 
         }
+        /* REVISI UKURAN LOGO NAVBAR */
         .logo img { 
-            height: 40px; 
+            height: 70px; /* Diperbesar dari 40px */
             width: auto;
             display: block;
+            transition: var(--transition);
         }
         
         nav ul { display: flex; list-style: none; }
@@ -261,6 +263,13 @@
         .footer-col ul li { list-style: none; margin-bottom: 12px; }
         .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
         .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
+        /* REVISI UKURAN LOGO FOOTER */
+        .footer-logo {
+            height: 80px; /* Diperbesar dari 40px */
+            width: auto;
+            margin-bottom: 20px;
+            display: block;
+        }
 
         /* ==========================================================================
             RESPONSIVE REVISIONS
@@ -281,6 +290,8 @@
             .menu-toggle { display: block; }
             .auth-buttons { order: 3; }
             .logo { order: 1; }
+            /* LOGO NAVBAR MOBILE SEDIKIT DISESUAIKAN */
+            .logo img { height: 55px; } 
             .auth-buttons .btn-filled { padding: 8px 15px; font-size: 10px; }
 
             nav {
@@ -298,7 +309,6 @@
             nav ul { flex-direction: column; padding: 20px; text-align: center; }
             nav ul li { margin: 15px 0; }
 
-            /* Blog Responsif Proporsional */
             .blog-grid { 
                 grid-template-columns: 1fr; 
                 gap: 25px; 
@@ -307,13 +317,13 @@
             }
             .blog-card img { height: 220px; }
 
-            /* Footer Responsif Rata Kiri */
             .footer-grid { 
                 grid-template-columns: 1fr; 
                 gap: 35px;
                 text-align: left; 
             }
             .footer-col { padding: 0; }
+            .footer-logo { height: 60px; } /* DISESUAIKAN UNTUK MOBILE */
 
             .filter-bar {
                 display: grid;
@@ -546,8 +556,8 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-col reveal reveal-up">
-                <img src="img/logo navbar.png" height="40" alt="Logo">
-                <p style="margin-top: 20px; font-size: 14px; color: #888;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi dan standar internasional.</p>
+                <img src="img/logo navbar.png" class="footer-logo" alt="Logo">
+                <p style="font-size: 14px; color: #888;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi dan standar internasional.</p>
             </div>
             <div class="footer-col reveal reveal-up">
                 <h4>Quick Links</h4>
