@@ -146,18 +146,19 @@
         .cat-btn-card-primary { background: var(--dark); color: white; text-align: center; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; transition: 0.3s; }
         .cat-btn-card-primary:hover { background: var(--primary); }
 
-        /* Footer */
+        /* --- Footer --- */
         footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; }
-        .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); font-size: 16px; }
         .footer-col ul li { list-style: none; margin-bottom: 12px; }
-        .footer-col ul li a { color: #666; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .footer-col ul li a:hover { color: white; padding-left: 5px; }
-
-        @media (max-width: 992px) {
-            .cat-flex-container { flex-direction: column; }
-            .cat-product-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+        .footer-col ul li a { color: #888; text-decoration: none; font-size: 14px; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
+        /* REVISI UKURAN LOGO FOOTER */
+        .footer-logo {
+            height: 80px; /* Diperbesar dari 40px */
+            width: auto;
+            margin-bottom: 20px;
+            display: block;
         }
     </style>
 </head>
