@@ -35,23 +35,41 @@
         .reveal-right { transform: translateX(50px); }
         .active { opacity: 1; transform: translate(0) scale(1); }
 
-        /* --- Navbar (Identik dengan Index) --- */
+        /* --- Navbar --- */
         header {
             background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
-            padding: 20px 0;
+            padding: 10px 0; /* Padding sedikit dikurangi untuk mengimbangi logo yang membesar */
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 900; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
-        .logo span { color: var(--primary); }
+        .nav-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        /* REVISI UKURAN LOGO NAVBAR */
+        .logo img { 
+            height: 140px; /* Diperbesar dari 40px */
+            width: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
         nav ul { display: flex; list-style: none; }
         nav ul li a { color: #ccc; text-decoration: none; margin: 0 18px; font-size: 13px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
         nav ul li a:hover, nav ul li a.active { color: var(--primary); }
         
+        .menu-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            order: 2;
+        }
+
         .btn-filled {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: var(--white);
@@ -65,6 +83,7 @@
             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
             display: inline-block;
         }
+        .btn-filled:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.5); }
 
         /* --- Katalog Page Scoped Styles --- */
         .catalog-page-wrapper { background: var(--white); padding-bottom: 80px; }
@@ -144,10 +163,17 @@
 </head>
 <body>
 
-    <header>
+   <header>
         <div class="container nav-container">
-            <div class="logo">DEALER<span>STAR</span></div>
-            <nav>
+            <div class="logo">
+                <a href="index.html"><img src="img/logo navbar.png" alt="Dealer Star Logo"></a>
+            </div>
+
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="nav-menu">
                 <ul>
                     <li><a href="index.html" class="active">Beranda</a></li>
                     <li><a href="katalog.html">Katalog</a></li>
@@ -155,6 +181,7 @@
                     <li><a href="blog.html">Artikel</a></li>
                 </ul>
             </nav>
+
             <div class="auth-buttons">
                 <a href="https://wa.me/628123456789" class="btn-filled">Kontak Eksklusif</a>
             </div>
@@ -284,20 +311,32 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-col reveal reveal-up">
-                <div class="logo">DEALER<span>STAR</span></div>
-                <p style="margin-top: 20px;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi.</p>
+                <img src="img/logo navbar.png" class="footer-logo" alt="Logo">
+                <p style="font-size: 14px; color: #888;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi dan standar internasional.</p>
             </div>
             <div class="footer-col reveal reveal-up">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#">Katalog Unit</a></li>
-                    <li><a href="#">Simulasi Kredit</a></li>
+                    <li><a href="#">Booking Service</a></li>
+                    <li><a href="#">Tukar Tambah</a></li>
+                    <li><a href="#">Promo Terbaru</a></li>
                 </ul>
             </div>
             <div class="footer-col reveal reveal-up">
-                <h4>Hubungi Kami</h4>
-                <p style="color: #666; font-size: 14px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
-                <p style="color: #666; font-size: 14px; margin-top: 10px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> concierge@dealerstar.com</p>
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#">Test Drive di Rumah</a></li>
+                    <li><a href="#">Asuransi Kendaraan</a></li>
+                    <li><a href="#">Suku Cadang Asli</a></li>
+                    <li><a href="#">Bantuan Darurat</a></li>
+                </ul>
+            </div>
+            <div class="footer-col reveal reveal-up">
+                <h4>Kontak</h4>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> Sudirman Central Business, Jakarta</p>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
+                <p style="color: #888; font-size: 14px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> info@dealerstar.co.id</p>
             </div>
         </div>
     </footer>
