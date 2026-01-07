@@ -25,6 +25,12 @@
             overflow-x: hidden;
         }
 
+        /* ====== REVISI: Container agar layout proporsional (navbar & footer) ====== */
+        .container{
+            width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
         /* --- Reveal Animation --- */
         .reveal { opacity: 0; transition: all 0.8s ease-out; }
         .reveal-up { transform: translateY(30px); }
@@ -44,6 +50,7 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            gap: 14px;
         }
         .logo img { 
             height: 70px; 
@@ -53,7 +60,17 @@
         }
         
         nav ul { display: flex; list-style: none; }
-        nav ul li a { color: #ccc; text-decoration: none; margin: 0 18px; font-size: 13px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        nav ul li a { 
+            color: #ccc; 
+            text-decoration: none; 
+            margin: 0 18px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            transition: 0.3s; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            white-space: nowrap;
+        }
         nav ul li a:hover, nav ul li a.active { color: var(--primary); }
         
         .menu-toggle {
@@ -62,6 +79,16 @@
             font-size: 24px;
             cursor: pointer;
             order: 2;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            transition: var(--transition);
+            user-select: none;
+        }
+        .menu-toggle:hover{
+            border-color: rgba(230, 126, 34, 0.35);
+            transform: translateY(-1px);
         }
 
         .btn-filled {
@@ -76,6 +103,7 @@
             text-transform: uppercase;
             box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3);
             display: inline-block;
+            white-space: nowrap;
         }
         .btn-filled:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(230, 126, 34, 0.5); }
 
@@ -209,7 +237,8 @@
             .det-hero { min-height: 450px; }
             .det-action-bar { padding: 20px 150px 30px; }
         }
-                /* --- Footer --- */
+
+        /* --- Footer --- */
         footer { background: #050505; color: white; padding: 80px 0 30px; border-top: 1px solid #111; }
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
         .footer-col h4 { margin-bottom: 25px; text-transform: uppercase; font-weight: 800; color: var(--primary); font-size: 16px; }
@@ -222,6 +251,88 @@
             width: auto;
             margin-bottom: 20px;
             display: block;
+        }
+
+        /* ====== REVISI: Navbar Mobile (Hamburger + dropdown) ====== */
+        @media (max-width: 767px) {
+            header{ padding: 8px 0; }
+            .logo img{ height: 56px; }
+            .menu-toggle{ display: inline-flex; align-items:center; justify-content:center; }
+
+            /* tombol kontak diperkecil agar proporsional */
+            .auth-buttons .btn-filled{
+                padding: 10px 14px;
+                font-size: 11px;
+                border-radius: 10px;
+            }
+
+            /* nav menjadi dropdown */
+            #nav-menu{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+            }
+
+            /* class open dari JS */
+            #nav-menu.open{
+                max-height: 320px;
+            }
+
+            #nav-menu ul{
+                flex-direction: column;
+                padding: 14px 18px 18px;
+                gap: 6px;
+            }
+
+            #nav-menu ul li a{
+                margin: 0;
+                display: block;
+                padding: 12px 12px;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+            }
+
+            #nav-menu ul li a:hover, #nav-menu ul li a.active{
+                background: rgba(230, 126, 34, 0.12);
+                border-color: rgba(230, 126, 34, 0.28);
+                color: var(--primary);
+            }
+        }
+
+        /* ====== REVISI: Footer responsive (rapi & proporsional di mobile) ====== */
+        @media (max-width: 767px){
+            footer{ padding: 60px 0 25px; }
+            .footer-grid{
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-logo{
+                height: 70px;
+                margin-left: 0;
+            }
+            .footer-col h4{
+                margin-bottom: 16px;
+                font-size: 15px;
+            }
+            .footer-col ul li a{
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px){
+            .footer-grid{
+                grid-template-columns: 1fr 1fr;
+                gap: 35px;
+            }
         }
     </style>
 </head>
@@ -441,6 +552,60 @@ Mohon info ketersediaan stok. Terima kasih.`;
                 const elementTop = el.getBoundingClientRect().top;
                 if (elementTop < windowHeight - 50) el.classList.add('active');
             });
+        });
+
+        /* ====== REVISI: Toggle menu navbar mobile (hamburger) ====== */
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            const icon = document.querySelector('.menu-toggle i');
+
+            nav.classList.toggle('open');
+
+            // ganti icon bars <-> xmark (tanpa ubah struktur HTML)
+            if (nav.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Tutup menu saat klik salah satu link (mobile)
+        document.querySelectorAll('#nav-menu a').forEach(a => {
+            a.addEventListener('click', () => {
+                const nav = document.getElementById('nav-menu');
+                const icon = document.querySelector('.menu-toggle i');
+                if (nav.classList.contains('open')) {
+                    nav.classList.remove('open');
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+
+        // Tutup menu jika klik di luar area header (mobile)
+        document.addEventListener('click', (e) => {
+            const headerEl = document.querySelector('header');
+            const nav = document.getElementById('nav-menu');
+            const icon = document.querySelector('.menu-toggle i');
+
+            if (!headerEl.contains(e.target) && nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Jika resize ke desktop, pastikan nav tidak nyangkut "open"
+        window.addEventListener('resize', () => {
+            const nav = document.getElementById('nav-menu');
+            const icon = document.querySelector('.menu-toggle i');
+            if (window.innerWidth >= 768 && nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
         });
     </script>
 </body>
