@@ -213,6 +213,87 @@
             margin-bottom: 20px;
             display: block;
         }
+                /* ====== REVISI: Navbar Mobile (Hamburger + dropdown) ====== */
+        @media (max-width: 767px) {
+            header{ padding: 8px 0; }
+            .logo img{ height: 56px; }
+            .menu-toggle{ display: inline-flex; align-items:center; justify-content:center; }
+
+            /* tombol kontak diperkecil agar proporsional */
+            .auth-buttons .btn-filled{
+                padding: 10px 14px;
+                font-size: 11px;
+                border-radius: 10px;
+            }
+
+            /* nav menjadi dropdown */
+            #nav-menu{
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.35s ease;
+            }
+
+            /* class open dari JS */
+            #nav-menu.open{
+                max-height: 320px;
+            }
+
+            #nav-menu ul{
+                flex-direction: column;
+                padding: 14px 18px 18px;
+                gap: 6px;
+            }
+
+            #nav-menu ul li a{
+                margin: 0;
+                display: block;
+                padding: 12px 12px;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+            }
+
+            #nav-menu ul li a:hover, #nav-menu ul li a.active{
+                background: rgba(230, 126, 34, 0.12);
+                border-color: rgba(230, 126, 34, 0.28);
+                color: var(--primary);
+            }
+        }
+
+        /* ====== REVISI: Footer responsive (rapi & proporsional di mobile) ====== */
+        @media (max-width: 767px){
+            footer{ padding: 60px 0 25px; }
+            .footer-grid{
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-logo{
+                height: 70px;
+                margin-left: 0;
+            }
+            .footer-col h4{
+                margin-bottom: 16px;
+                font-size: 15px;
+            }
+            .footer-col ul li a{
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px){
+            .footer-grid{
+                grid-template-columns: 1fr 1fr;
+                gap: 35px;
+            }
+        }
     </style>
 </head>
 <body>
