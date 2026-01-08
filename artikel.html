@@ -3,14 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- ✅ SEO dasar (akan di-update dinamis via JS juga) -->
   <title>Artikel - Dealer Star Insights</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta name="description" content="Baca artikel terbaru dari Star Insights Dealer Star: teknologi kendaraan, tips perawatan, dan liputan event premium.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Dealer Star">
+  <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark light">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- ✅ Canonical (akan di-update via JS agar include ?post=) -->
+  <link rel="canonical" href="https://dealerstar.co.id/artikel.html">
+
+  <!-- ✅ Open Graph / Twitter (akan di-update via JS per post) -->
+  <meta property="og:locale" content="id_ID">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Artikel - Star Insights">
+  <meta property="og:description" content="Baca artikel terbaru dari Dealer Star.">
+  <meta property="og:url" content="https://dealerstar.co.id/artikel.html">
+  <meta property="og:image" content="https://dealerstar.co.id/img/logo.jpeg">
+  <meta property="og:image:alt" content="Star Insights - Dealer Star">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Artikel - Star Insights">
+  <meta name="twitter:description" content="Baca artikel terbaru dari Dealer Star.">
+  <meta name="twitter:image" content="https://dealerstar.co.id/img/logo.jpeg">
+
+  <!-- ✅ Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="shortcut icon" href="img/logo.jpeg">
+
+  <!-- ✅ Performance -->
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://media.giphy.com" crossorigin>
+  <link rel="dns-prefetch" href="https://media.giphy.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+  <link rel="preload" href="img/logo.jpeg" as="image">
+
+  <!-- ✅ FontAwesome non-blocking -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </noscript>
+
+  <!-- ✅ JSON-LD base (akan di-inject dinamis per post) -->
+  <script type="application/ld+json" id="jsonLdBase">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "@id":"https://dealerstar.co.id/#website",
+        "url":"https://dealerstar.co.id/",
+        "name":"Dealer Star",
+        "inLanguage":"id-ID"
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://dealerstar.co.id/artikel.html#webpage",
+        "url":"https://dealerstar.co.id/artikel.html",
+        "name":"Artikel | Star Insights",
+        "description":"Halaman detail artikel Dealer Star.",
+        "isPartOf":{"@id":"https://dealerstar.co.id/#website"},
+        "inLanguage":"id-ID"
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root{
       --primary:#e67e22;
       --primary-light:#ff9d47;
-      --bg:#07090d;               /* kontras dengan blog (lebih "editorial") */
+      --bg:#07090d;
       --surface:#0f131b;
       --surface-2:#0b0f16;
       --text:#ffffff;
@@ -20,18 +93,34 @@
       --shadow:0 20px 60px rgba(0,0,0,.55);
       --radius:18px;
       --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* ✅ untuk offset sticky (TOC scroll, dll) */
+      --header-h: 70px;
+      --scroll-offset: 96px;
     }
 
     *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, sans-serif; }
-    body{ background: radial-gradient(1200px 800px at 15% 10%, rgba(230,126,34,.14), transparent 60%),
-                      radial-gradient(900px 700px at 85% 15%, rgba(255,157,71,.12), transparent 55%),
-                      var(--bg);
-          color: var(--text); line-height:1.75; overflow-x:hidden; }
+    body{
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(230,126,34,.14), transparent 60%),
+        radial-gradient(900px 700px at 85% 15%, rgba(255,157,71,.12), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
 
     a{ color:inherit; }
     .container{ max-width: 1200px; margin:0 auto; padding:0 22px; }
 
-    /* Header mini (kontras, lebih ringkas dari blog) */
+    /* ✅ Aksesibilitas fokus */
+    :focus-visible{
+      outline: 2px solid rgba(230,126,34,.7);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+
+    /* Header mini */
     header{
       position: sticky; top:0; z-index: 1000;
       background: rgba(7,9,13,.92);
@@ -42,15 +131,29 @@
       display:flex; align-items:center; justify-content:space-between;
       padding: 12px 0;
       gap: 12px;
+      min-height: var(--header-h);
     }
     .brand{
       display:flex; align-items:center; gap:12px; text-decoration:none;
+      min-width: 0;
     }
-    .brand img{ height:44px; width:44px; border-radius:12px; object-fit:cover; border:1px solid var(--border); }
-    .brand strong{ letter-spacing:.6px; font-weight:900; font-size:13px; text-transform:uppercase; }
-    .brand span{ display:block; font-size:12px; color:var(--muted); margin-top:-2px; }
+    .brand img{
+      height:44px; width:44px; border-radius:12px; object-fit:cover;
+      border:1px solid var(--border);
+      flex: 0 0 auto;
+    }
+    .brand strong{
+      letter-spacing:.6px; font-weight:900; font-size:13px; text-transform:uppercase;
+    }
+    .brand span{
+      display:block; font-size:12px; color:var(--muted); margin-top:-2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 52vw;
+    }
 
-    .top-actions{ display:flex; align-items:center; gap:10px; }
+    .top-actions{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:10px;
@@ -64,6 +167,7 @@
       font-size:12px;
       text-transform:uppercase;
       transition: var(--transition);
+      white-space: nowrap;
     }
     .btn:hover{ transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
     .btn.ghost{
@@ -73,12 +177,10 @@
     }
 
     /* Layout */
-    .page{
-      padding: 26px 0 90px;
-    }
+    .page{ padding: 26px 0 90px; }
     .grid{
       display:grid;
-      grid-template-columns: 1.25fr .75fr; /* konten + sidebar */
+      grid-template-columns: 1.25fr .75fr;
       gap: 26px;
       align-items: start;
       margin-top: 18px;
@@ -90,6 +192,7 @@
       color: var(--muted);
       font-size: 13px;
       margin-top: 14px;
+      flex-wrap: wrap;
     }
     .crumbs a{ text-decoration:none; color: var(--muted); }
     .crumbs a:hover{ color: var(--text); }
@@ -103,9 +206,7 @@
       overflow:hidden;
       box-shadow: var(--shadow);
     }
-    .hero-head{
-      padding: 26px 26px 14px;
-    }
+    .hero-head{ padding: 26px 26px 14px; }
     .badge{
       display:inline-flex;
       align-items:center;
@@ -170,6 +271,12 @@
       border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+    }
+
+    /* ✅ scroll offset aman (sticky header) */
+    .content-card h2,
+    .content-card h3{
+      scroll-margin-top: var(--scroll-offset);
     }
 
     .content-card h2{
@@ -262,7 +369,7 @@
     }
     .panel .bd{ padding: 14px 16px; }
 
-    /* TOC (auto H2/H3) */
+    /* TOC */
     details.toc{
       border:1px solid var(--border);
       border-radius: 14px;
@@ -279,6 +386,7 @@
       list-style:none;
       display:flex; align-items:center; justify-content:space-between;
       color: #f3f6ff;
+      user-select: none;
     }
     details.toc summary::-webkit-details-marker{ display:none; }
     .toc-list{
@@ -366,12 +474,20 @@
       list-style:none;
       display:flex; align-items:center; justify-content:space-between;
       gap:12px;
+      user-select: none;
     }
     .faq summary::-webkit-details-marker{ display:none; }
     .faq .ans{
       padding: 0 14px 14px;
       color:#c8d0df;
       font-size: 15px;
+    }
+    .faq summary i{
+      color: var(--primary);
+      transition: .2s;
+    }
+    .faq details[open] summary i{
+      transform: rotate(45deg);
     }
 
     /* Author */
@@ -387,7 +503,7 @@
     .author span{ display:block; color: var(--muted); font-size: 13px; margin-top: 4px; }
     .author .bio{ color:#c8d0df; font-size: 14px; margin-top: 8px; }
 
-    /* Related (3 cards) */
+    /* Related */
     .related-wrap{
       margin-top: 18px;
       background: rgba(15,19,27,.78);
@@ -442,6 +558,36 @@
     }
     .section-title i{ color: var(--primary); }
 
+    /* Toast */
+    .toast{
+      display:none;
+      margin-top:10px;
+      color:#bcd4ff;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* Back-to-top */
+    .to-top{
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      z-index: 2100;
+      display:none;
+      border:none;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:#fff;
+      font-weight: 950;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+    .to-top i{ color: var(--primary); margin-right: 8px; }
+    .to-top:hover{ transform: translateY(-2px); border-color: rgba(230,126,34,.28); }
+
     /* Mobile share bar */
     .mobile-share{
       display:none;
@@ -453,9 +599,7 @@
       padding: 10px 12px;
       z-index: 2000;
     }
-    .mobile-share .row{
-      display:flex; gap:10px;
-    }
+    .mobile-share .row{ display:flex; gap:10px; }
     .mobile-share button{
       flex:1;
       display:flex; align-items:center; justify-content:center; gap:10px;
@@ -474,12 +618,18 @@
 
     /* Responsif */
     @media (max-width: 980px){
+      :root{ --header-h: 76px; --scroll-offset: 104px; }
       .grid{ grid-template-columns: 1fr; }
       .side{ position: static; }
       .related-grid{ grid-template-columns: 1fr; }
       figure.media img{ height: 240px; }
       .mobile-share{ display:block; }
       .page{ padding-bottom: 130px; }
+      .to-top{ bottom: 140px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; scroll-behavior: auto !important; }
     }
   </style>
 </head>
@@ -487,42 +637,42 @@
 <body>
   <header>
     <div class="container topbar">
-      <a class="brand" href="blog.html">
-        <img src="img/logo.jpeg" alt="Dealer Star">
+      <a class="brand" href="blog.html" aria-label="Kembali ke halaman artikel">
+        <img src="img/logo.jpeg" alt="Dealer Star" width="44" height="44" decoding="async">
         <div>
           <strong>Star Insights</strong>
-          <span>Kembali ke halaman artikel</span>
+          <span id="brandSub">Kembali ke halaman artikel</span>
         </div>
       </a>
       <div class="top-actions">
-        <a class="btn ghost" href="blog.html"><i class="fa-solid fa-arrow-left"></i> Blog</a>
-        <a class="btn" href="https://wa.me/628123456789" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Kontak</a>
+        <a class="btn ghost" href="blog.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Blog</a>
+        <a class="btn" href="https://wa.me/628123456789" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Kontak</a>
       </div>
     </div>
   </header>
 
   <main class="container page">
-    <div class="crumbs" id="crumbs">
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb">
       <a href="index.html">Beranda</a> <span class="dot"></span>
       <a href="blog.html">Artikel</a> <span class="dot"></span>
       <span id="crumbTitle">Judul Artikel</span>
-    </div>
+    </nav>
 
     <!-- HERO -->
     <section class="hero" aria-label="Header artikel">
       <div class="hero-head">
-        <span class="badge" id="badgeCat"><i class="fa-solid fa-star"></i> Teknologi</span>
+        <span class="badge" id="badgeCat"><i class="fa-solid fa-star" aria-hidden="true"></i> Teknologi</span>
         <h1 id="postTitle">Judul Artikel</h1>
 
         <div class="meta">
-          <span class="pill"><i class="fa-regular fa-calendar"></i> <span id="postDate">08 Jan 2026</span></span>
-          <span class="pill"><i class="fa-regular fa-clock"></i> <span id="postRead">6 menit baca</span></span>
-          <span class="pill"><i class="fa-regular fa-user"></i> <span id="postAuthor">Tech Concierge</span></span>
+          <span class="pill"><i class="fa-regular fa-calendar" aria-hidden="true"></i> <span id="postDate">08 Jan 2026</span></span>
+          <span class="pill"><i class="fa-regular fa-clock" aria-hidden="true"></i> <span id="postRead">6 menit baca</span></span>
+          <span class="pill"><i class="fa-regular fa-user" aria-hidden="true"></i> <span id="postAuthor">Tech Concierge</span></span>
         </div>
       </div>
 
       <figure class="cover">
-        <img id="coverImg" src="" alt="Gambar utama artikel">
+        <img id="coverImg" src="" alt="Gambar utama artikel" decoding="async" fetchpriority="high">
         <figcaption id="coverCaption">Deskripsi foto.</figcaption>
       </figure>
     </section>
@@ -530,44 +680,40 @@
     <div class="grid">
       <!-- CONTENT -->
       <section>
-        <article class="content-card">
-          <!-- Content akan di-render -->
+        <article class="content-card" aria-label="Konten artikel">
           <div id="postContent"></div>
 
           <!-- GIF PROMO (1) -->
           <figure class="media gif" id="promoGif1Wrap" style="display:none;">
-            <img id="promoGif1" src="" alt="Promosi Dealer Star (GIF)">
+            <img id="promoGif1" src="" alt="Promosi Dealer Star (GIF)" decoding="async" loading="lazy">
             <figcaption id="promoGif1Cap"></figcaption>
           </figure>
 
-          <!-- FAQ + Kesimpulan akan disisipkan -->
           <div id="postTail"></div>
         </article>
 
         <!-- 3 Artikel Terkait -->
         <section class="related-wrap" aria-label="Artikel terkait">
-          <div class="section-title"><i class="fa-solid fa-layer-group"></i> 3 Artikel Terkait</div>
+          <div class="section-title"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 3 Artikel Terkait</div>
           <div class="related-grid" id="relatedGrid"></div>
         </section>
       </section>
 
       <!-- SIDEBAR -->
-      <aside class="side">
-        <!-- TOC otomatis (H2/H3, collapsible) -->
+      <aside class="side" aria-label="Sidebar artikel">
+        <!-- TOC -->
         <div class="panel">
           <div class="hd">
-            <strong><i class="fa-solid fa-list"></i> TOC</strong>
+            <strong><i class="fa-solid fa-list" aria-hidden="true"></i> TOC</strong>
             <span style="color:var(--muted); font-size:12px;">Auto H2/H3</span>
           </div>
           <div class="bd">
             <details class="toc" open>
               <summary>
                 Daftar Isi
-                <i class="fa-solid fa-chevron-down"></i>
+                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
               </summary>
-              <div class="toc-list" id="tocList">
-                <!-- auto -->
-              </div>
+              <div class="toc-list" id="tocList" aria-label="Daftar isi"></div>
             </details>
           </div>
         </div>
@@ -575,43 +721,39 @@
         <!-- Share -->
         <div class="panel">
           <div class="hd">
-            <strong><i class="fa-solid fa-share-nodes"></i> Share</strong>
+            <strong><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share</strong>
             <span style="color:var(--muted); font-size:12px;">Aktif</span>
           </div>
           <div class="bd">
             <div class="share-grid">
-              <button class="share-btn" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
-              <button class="share-btn" id="shareFB"><i class="fa-brands fa-facebook-f"></i> Facebook</button>
-              <button class="share-btn" id="shareX"><i class="fa-brands fa-x-twitter"></i> X</button>
-              <button class="share-btn" id="shareLI"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</button>
-              <button class="share-btn" id="shareNative"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
-              <button class="share-btn" id="copyLink"><i class="fa-regular fa-copy"></i> Copy</button>
+              <button class="share-btn" id="shareWA" type="button" aria-label="Bagikan ke WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</button>
+              <button class="share-btn" id="shareFB" type="button" aria-label="Bagikan ke Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i> Facebook</button>
+              <button class="share-btn" id="shareX" type="button" aria-label="Bagikan ke X"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i> X</button>
+              <button class="share-btn" id="shareLI" type="button" aria-label="Bagikan ke LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> LinkedIn</button>
+              <button class="share-btn" id="shareNative" type="button" aria-label="Share perangkat"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i> Share</button>
+              <button class="share-btn" id="copyLink" type="button" aria-label="Salin tautan"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
             </div>
-            <p id="copyToast" style="display:none;margin-top:10px;color:#bcd4ff;font-weight:700;font-size:13px;">
-              Link tersalin ✅
-            </p>
+            <p id="copyToast" class="toast" aria-live="polite">Link tersalin ✅</p>
           </div>
         </div>
 
-        <!-- Baca Juga (minimal 2) -->
+        <!-- Baca Juga -->
         <div class="panel">
           <div class="hd">
-            <strong><i class="fa-solid fa-book-open"></i> Baca Juga</strong>
+            <strong><i class="fa-solid fa-book-open" aria-hidden="true"></i> Baca Juga</strong>
             <span style="color:var(--muted); font-size:12px;">Min 2</span>
           </div>
-          <div class="bd also" id="bacaJuga">
-            <!-- auto -->
-          </div>
+          <div class="bd also" id="bacaJuga"></div>
         </div>
 
         <!-- Profil penulis -->
         <div class="panel">
           <div class="hd">
-            <strong><i class="fa-solid fa-user-pen"></i> Profil Penulis</strong>
+            <strong><i class="fa-solid fa-user-pen" aria-hidden="true"></i> Profil Penulis</strong>
             <span style="color:var(--muted); font-size:12px;">Resmi</span>
           </div>
           <div class="author" id="authorBox">
-            <img id="authorAvatar" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&q=80&w=240" alt="Foto penulis">
+            <img id="authorAvatar" src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&q=80&w=240" alt="Foto penulis" loading="lazy" decoding="async" referrerpolicy="no-referrer">
             <div>
               <strong id="authorName">Tech Concierge</strong>
               <span id="authorRole">Konsultan Teknologi & Experience</span>
@@ -625,13 +767,18 @@
     </div>
   </main>
 
+  <!-- Back to top -->
+  <button class="to-top" id="toTop" type="button" aria-label="Kembali ke atas">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i> Atas
+  </button>
+
   <!-- Mobile share bar -->
   <div class="mobile-share" aria-label="Share cepat">
     <div class="container">
       <div class="row">
-        <button id="mWA"><i class="fa-brands fa-whatsapp"></i> WA</button>
-        <button id="mShare"><i class="fa-solid fa-arrow-up-from-bracket"></i> Share</button>
-        <button id="mCopy"><i class="fa-regular fa-copy"></i> Copy</button>
+        <button id="mWA" type="button" aria-label="Share WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WA</button>
+        <button id="mShare" type="button" aria-label="Share perangkat"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i> Share</button>
+        <button id="mCopy" type="button" aria-label="Copy link"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
       </div>
     </div>
   </div>
@@ -1198,30 +1345,113 @@
     };
 
     // ============================================================
-    // 2) UTIL: ambil param post
+    // 2) UTIL
     // ============================================================
     function getParam(name){
       const url = new URL(window.location.href);
       return url.searchParams.get(name);
     }
 
-    // ============================================================
-    // 3) Render artikel + tail (FAQ, kesimpulan, promo GIF 2)
-    // ============================================================
-    const postKey = getParam("post") || "era-mobil-listrik-2026";
-    const post = POSTS[postKey] || POSTS["era-mobil-listrik-2026"];
+    function safeText(s){
+      return String(s || "").replace(/[<>]/g, "");
+    }
 
-    // Set head
-    document.title = `${post.title} - Star Insights`;
+    // slug unik (hindari id duplikat)
+    function slugifyUnique(text, used){
+      const base = safeText(text).toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .slice(0, 80) || "section";
+
+      let slug = base;
+      let i = 2;
+      while(used.has(slug)){
+        slug = `${base}-${i++}`;
+      }
+      used.add(slug);
+      return slug;
+    }
+
+    function setMeta(nameOrProp, content, isProperty=false){
+      const selector = isProperty ? `meta[property="${nameOrProp}"]` : `meta[name="${nameOrProp}"]`;
+      let el = document.querySelector(selector);
+      if(!el){
+        el = document.createElement("meta");
+        if(isProperty) el.setAttribute("property", nameOrProp);
+        else el.setAttribute("name", nameOrProp);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    }
+
+    function setCanonical(url){
+      let link = document.querySelector('link[rel="canonical"]');
+      if(!link){
+        link = document.createElement("link");
+        link.rel = "canonical";
+        document.head.appendChild(link);
+      }
+      link.href = url;
+    }
+
+    function parseIDDateToISO(dateStr){
+      // format: "08 Jan 2026"
+      // fallback: jangan maksa, pakai tanggal sekarang kalau gagal
+      try{
+        const map = {Jan:0,Feb:1,Mar:2,Apr:3,Mei:4,May:4,Jun:5,Jul:6,Agu:7,Aug:7,Sep:8,Okt:9,Oct:9,Nov:10,Des:11,Dec:11};
+        const parts = String(dateStr).trim().split(/\s+/);
+        const dd = parseInt(parts[0],10);
+        const mm = map[parts[1]];
+        const yy = parseInt(parts[2],10);
+        if(Number.isFinite(dd) && Number.isFinite(mm) && Number.isFinite(yy)){
+          const d = new Date(Date.UTC(yy, mm, dd, 0, 0, 0));
+          return d.toISOString();
+        }
+      }catch(e){}
+      return new Date().toISOString();
+    }
+
+    // ============================================================
+    // 3) Render artikel
+    // ============================================================
+    const postKeyRaw = getParam("post") || "era-mobil-listrik-2026";
+    const postKey = POSTS[postKeyRaw] ? postKeyRaw : "era-mobil-listrik-2026";
+    const post = POSTS[postKey];
+
+    // Set head + breadcrumb
+    const fullTitle = `${post.title} - Star Insights`;
+    document.title = fullTitle;
     document.getElementById("crumbTitle").textContent = post.title;
+    document.getElementById("brandSub").textContent = post.title;
 
-    document.getElementById("badgeCat").innerHTML = `<i class="fa-solid fa-star"></i> ${post.category}`;
+    // Canonical yang stabil (include ?post=)
+    const canonicalUrl = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(postKey)}`;
+    setCanonical(canonicalUrl);
+
+    // Meta SEO / OG / Twitter dinamis
+    setMeta("description", post.excerpt || `Baca artikel: ${post.title}`);
+    setMeta("og:title", fullTitle, true);
+    setMeta("og:description", post.excerpt || `Baca artikel: ${post.title}`, true);
+    setMeta("og:url", canonicalUrl, true);
+    setMeta("og:image", post.cover.img, true);
+    setMeta("og:image:alt", post.title, true);
+
+    setMeta("twitter:title", fullTitle);
+    setMeta("twitter:description", post.excerpt || `Baca artikel: ${post.title}`);
+    setMeta("twitter:image", post.cover.img);
+
+    // HERO
+    document.getElementById("badgeCat").innerHTML = `<i class="fa-solid fa-star" aria-hidden="true"></i> ${safeText(post.category)}`;
     document.getElementById("postTitle").textContent = post.title;
     document.getElementById("postDate").textContent = post.date;
     document.getElementById("postRead").textContent = post.read;
     document.getElementById("postAuthor").textContent = post.author.name;
 
-    document.getElementById("coverImg").src = post.cover.img;
+    const coverImg = document.getElementById("coverImg");
+    coverImg.src = post.cover.img;
+    coverImg.alt = post.title;
+    coverImg.referrerPolicy = "no-referrer";
     document.getElementById("coverCaption").textContent = post.cover.caption;
 
     // Author box
@@ -1234,6 +1464,13 @@
     const contentEl = document.getElementById("postContent");
     contentEl.innerHTML = post.content;
 
+    // Tambahkan loading lazy untuk img di dalam konten (yang diinject)
+    contentEl.querySelectorAll("img").forEach(img => {
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.referrerPolicy = "no-referrer";
+    });
+
     // Promo GIF 1
     if(post.promoGif1?.src){
       document.getElementById("promoGif1Wrap").style.display = "block";
@@ -1241,7 +1478,7 @@
       document.getElementById("promoGif1Cap").textContent = post.promoGif1.caption || "Promosi Dealer Star.";
     }
 
-    // Tail: Baca Juga + FAQ + Kesimpulan + Promo GIF 2
+    // Tail: Promo GIF 2 + FAQ + Kesimpulan
     const tailEl = document.getElementById("postTail");
 
     const faqHtml = `
@@ -1250,10 +1487,10 @@
         ${post.faqs.map(item => `
           <details>
             <summary>
-              <span>${item.q}</span>
-              <i class="fa-solid fa-plus"></i>
+              <span>${safeText(item.q)}</span>
+              <i class="fa-solid fa-plus" aria-hidden="true"></i>
             </summary>
-            <div class="ans">${item.a}</div>
+            <div class="ans">${safeText(item.a)}</div>
           </details>
         `).join("")}
       </div>
@@ -1266,8 +1503,8 @@
 
     const promoGif2Html = post.promoGif2?.src ? `
       <figure class="media gif">
-        <img src="${post.promoGif2.src}" alt="Promosi Dealer Star (GIF)">
-        <figcaption>${post.promoGif2.caption || "Promosi Dealer Star."}</figcaption>
+        <img src="${post.promoGif2.src}" alt="Promosi Dealer Star (GIF)" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+        <figcaption>${safeText(post.promoGif2.caption || "Promosi Dealer Star.")}</figcaption>
       </figure>
     ` : "";
 
@@ -1278,25 +1515,30 @@
     `;
 
     // ============================================================
-    // 4) TOC otomatis dari H2 & H3 (collapsible sudah via <details>)
+    // 4) TOC otomatis dari H2 & H3 (konten + tail, biar lengkap)
     // ============================================================
-    function slugify(text){
-      return text.toLowerCase()
-        .replace(/<\/?[^>]+(>|$)/g, "")
-        .replace(/[^\w\s-]/g, "")
-        .trim()
-        .replace(/\s+/g, "-");
-    }
-
     function buildTOC(){
       const toc = document.getElementById("tocList");
       toc.innerHTML = "";
 
-      const headings = contentEl.querySelectorAll("h2, h3");
-      headings.forEach(h => {
-        const id = slugify(h.textContent);
-        h.id = h.id || id;
+      const used = new Set();
+      const headings = document.querySelectorAll(".content-card h2, .content-card h3");
 
+      // Buat ID unik
+      headings.forEach(h => {
+        if(!h.id){
+          h.id = slugifyUnique(h.textContent, used);
+        }else{
+          // kalau id ada, tetap pastikan unik
+          const base = h.id;
+          let i=2, next=base;
+          while(used.has(next)) next = `${base}-${i++}`;
+          h.id = next;
+          used.add(next);
+        }
+      });
+
+      headings.forEach(h => {
         const a = document.createElement("a");
         a.href = `#${h.id}`;
         a.textContent = h.textContent;
@@ -1304,8 +1546,11 @@
 
         a.addEventListener("click", (e) => {
           e.preventDefault();
-          document.querySelector(a.getAttribute("href")).scrollIntoView({behavior:"smooth", block:"start"});
-          history.replaceState(null, "", a.getAttribute("href"));
+          const target = document.getElementById(h.id);
+          if(target){
+            target.scrollIntoView({behavior:"smooth", block:"start"});
+            history.replaceState(null, "", a.getAttribute("href"));
+          }
         });
 
         toc.appendChild(a);
@@ -1313,6 +1558,8 @@
 
       // Active state on scroll
       const links = [...toc.querySelectorAll("a")];
+      if(!links.length) return;
+
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if(entry.isIntersecting){
@@ -1320,34 +1567,34 @@
             links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === `#${id}`));
           }
         });
-      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.05 });
+      }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.04 });
 
       headings.forEach(h => obs.observe(h));
     }
     buildTOC();
 
     // ============================================================
-    // 5) Baca Juga (min 2) + 3 Artikel Terkait (cards)
+    // 5) Baca Juga + Related
     // ============================================================
     const allKeys = Object.keys(POSTS);
+
     function pickRelated(minCount, sameCategoryFirst=true){
       const others = allKeys.filter(k => k !== postKey);
       const sameCat = others.filter(k => POSTS[k].category === post.category);
       const diffCat = others.filter(k => POSTS[k].category !== post.category);
-
       const pool = sameCategoryFirst ? [...sameCat, ...diffCat] : [...diffCat, ...sameCat];
       return pool.slice(0, minCount);
     }
 
-    // Baca Juga minimal 2
+    // Baca Juga min 2
     const bacaJugaKeys = pickRelated(2, true);
     const bacaWrap = document.getElementById("bacaJuga");
     bacaWrap.innerHTML = bacaJugaKeys.map(k => {
       const p = POSTS[k];
       return `
-        <a href="artikel.html?post=${encodeURIComponent(k)}">
-          <strong>${p.title}</strong>
-          <span>${p.excerpt}</span>
+        <a href="artikel.html?post=${encodeURIComponent(k)}" aria-label="Baca juga: ${safeText(p.title)}">
+          <strong>${safeText(p.title)}</strong>
+          <span>${safeText(p.excerpt)}</span>
         </a>
       `;
     }).join("");
@@ -1359,21 +1606,23 @@
       const p = POSTS[k];
       return `
         <div class="rel-card">
-          <img src="${p.cover.img}" alt="${p.title}">
+          <img src="${p.cover.img}" alt="${safeText(p.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
           <div class="rel-body">
-            <strong>${p.title}</strong>
-            <p>${p.excerpt}</p>
-            <a href="artikel.html?post=${encodeURIComponent(k)}">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+            <strong>${safeText(p.title)}</strong>
+            <p>${safeText(p.excerpt)}</p>
+            <a href="artikel.html?post=${encodeURIComponent(k)}" aria-label="Baca selengkapnya: ${safeText(p.title)}">
+              Baca Selengkapnya <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
       `;
     }).join("");
 
     // ============================================================
-    // 6) Share buttons aktif (Sosial + WA) + copy link
+    // 6) Share buttons + copy link
     // ============================================================
     function currentShareUrl(){
-      return window.location.href;
+      return canonicalUrl; // pakai canonical agar rapi
     }
     function openShare(url){
       window.open(url, "_blank", "noopener,noreferrer");
@@ -1390,7 +1639,7 @@
       openShare(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl())}`);
     };
     document.getElementById("shareX").onclick = () => {
-      openShare(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText())}&url=${encodeURIComponent(shareUrl())}`);
+      openShare(`https://x.com/intent/post?text=${encodeURIComponent(shareText())}&url=${encodeURIComponent(shareUrl())}`);
     };
     document.getElementById("shareLI").onclick = () => {
       openShare(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl())}`);
@@ -1402,7 +1651,6 @@
           await navigator.share({ title: post.title, text: shareText(), url: shareUrl() });
         }catch(e){}
       }else{
-        // fallback: WA
         const txt = encodeURIComponent(`${shareText()}\n${shareUrl()}`);
         openShare(`https://wa.me/?text=${txt}`);
       }
@@ -1425,6 +1673,59 @@
     document.getElementById("mWA").onclick = () => document.getElementById("shareWA").click();
     document.getElementById("mShare").onclick = nativeShare;
     document.getElementById("mCopy").onclick = copyLink;
+
+    // ============================================================
+    // 7) Back-to-top
+    // ============================================================
+    const toTop = document.getElementById("toTop");
+    window.addEventListener("scroll", () => {
+      toTop.style.display = (window.scrollY > 600) ? "block" : "none";
+    });
+    toTop.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+    // ============================================================
+    // 8) JSON-LD dinamis (BlogPosting + BreadcrumbList)
+    // ============================================================
+    (function injectJsonLd(){
+      const publishedISO = parseIDDateToISO(post.date);
+
+      const json = {
+        "@context":"https://schema.org",
+        "@graph":[
+          {
+            "@type":"BreadcrumbList",
+            "@id": `${canonicalUrl}#breadcrumb`,
+            "itemListElement":[
+              {"@type":"ListItem","position":1,"name":"Beranda","item": `${window.location.origin}/`},
+              {"@type":"ListItem","position":2,"name":"Artikel","item": `${window.location.origin}/blog.html`},
+              {"@type":"ListItem","position":3,"name": post.title, "item": canonicalUrl}
+            ]
+          },
+          {
+            "@type":"BlogPosting",
+            "@id": `${canonicalUrl}#post`,
+            "mainEntityOfPage": canonicalUrl,
+            "headline": post.title,
+            "description": post.excerpt || post.title,
+            "image": [post.cover.img],
+            "datePublished": publishedISO,
+            "dateModified": publishedISO,
+            "author": {"@type":"Person","name": post.author.name},
+            "publisher": {
+              "@type":"Organization",
+              "name":"Dealer Star",
+              "logo":{"@type":"ImageObject","url": `${window.location.origin}/img/logo.jpeg`}
+            },
+            "inLanguage":"id-ID"
+          }
+        ]
+      };
+
+      const el = document.createElement("script");
+      el.type = "application/ld+json";
+      el.textContent = JSON.stringify(json);
+      document.head.appendChild(el);
+    })();
   </script>
 </body>
 </html>
