@@ -48,7 +48,6 @@
             justify-content: space-between; 
             align-items: center; 
         }
-        /* 1. REVISI UKURAN NAVBAR DESKTOP (PROPORSIAL) */
         .logo img { 
             height: 70px; 
             width: auto;
@@ -165,6 +164,7 @@
             display: flex;
             flex-direction: column;
             animation: fadeInCard 0.5s ease forwards;
+            cursor: pointer;
         }
         @keyframes fadeInCard {
             from { opacity: 0; transform: translateY(20px); }
@@ -202,6 +202,51 @@
         }
         #noResults i { font-size: 50px; color: #222; margin-bottom: 20px; }
 
+        /* --- PAGINATION (Prev/Next) --- */
+        .blg-pagination{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap: 12px;
+            margin-top: 45px;
+        }
+        .blg-page-btn{
+            background: #111;
+            border: 1px solid #222;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+        .blg-page-btn:hover{
+            transform: translateY(-2px);
+            border-color: rgba(230,126,34,0.45);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+        }
+        .blg-page-btn:disabled{
+            opacity: .35;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .blg-page-info{
+            color:#888;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 6px;
+            user-select:none;
+        }
+
         /* --- 4. Newsletter --- */
         .blg-newsletter { padding: 100px 0; background: #070707; }
         .blg-news-box {
@@ -211,7 +256,6 @@
         }
         .blg-news-box h2 { font-size: 28px; margin-bottom: 10px; font-weight: 900; }
         
-        /* 3. REVISI FORM BERLANGGANAN (CENTERED & PROPORSIAL) */
         .blg-input-group {
             display: flex; 
             gap: 10px; 
@@ -219,7 +263,7 @@
             padding: 6px; 
             border-radius: 50px; 
             margin: 30px auto 0;
-            max-width: 500px; /* Batasi lebar kolom agar tidak melebar */
+            max-width: 500px;
             border: 1px solid #222;
         }
         .blg-input-group input { 
@@ -230,7 +274,7 @@
             color: white; 
             outline: none; 
             font-size: 14px;
-            min-width: 0; /* Hindari input meluap pada container kecil */
+            min-width: 0;
         }
 
         /* --- Footer --- */
@@ -242,13 +286,11 @@
         .footer-col ul li a:hover { color: var(--white); padding-left: 5px; }
         .footer-logo { height: 60px; width: auto; margin-bottom: 20px; display: block; }
 
-        /* ==========================================================================
-            RESPONSIVE REVISIONS
-           ========================================================================== */
+        /* ========================================================================== RESPONSIVE REVISIONS ========================================================================== */
 
         @media (max-width: 992px) {
             .logo img { height: 60px; }
-            .blog-grid { grid-template-columns: repeat(2, 1fr); }
+            .blg-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
@@ -275,7 +317,6 @@
             nav ul { flex-direction: column; padding: 20px; text-align: center; }
             nav ul li { margin: 15px 0; }
 
-            /* 2. REVISI TAMPILAN BLOG MOBILE (PROPORSIAL) */
             .blg-grid { 
                 grid-template-columns: 1fr; 
                 gap: 25px; 
@@ -284,7 +325,6 @@
             }
             .blg-card-img { height: 200px; }
 
-            /* 3. REVISI NEWSLETTER MOBILE */
             .blg-news-box { padding: 30px 20px; }
             .blg-input-group { 
                 flex-direction: column; 
@@ -302,6 +342,10 @@
             }
             .blg-input-group button { width: 100%; border-radius: 50px; padding: 15px; }
 
+            /* pagination mobile */
+            .blg-pagination{ gap: 10px; flex-wrap: wrap; }
+            .blg-page-btn{ width: 48%; justify-content:center; }
+            .blg-page-info{ width: 100%; text-align:center; }
             .footer-grid { grid-template-columns: 1fr; gap: 35px; text-align: left; }
             .footer-col { padding: 0; }
         }
@@ -339,7 +383,7 @@
             <span class="blg-featured-tag">Artikel Pilihan</span>
             <h1>Evolusi Berkendara:<br>Menyambut Era Mobil Listrik 2026</h1>
             <p>Dealer Star menghadirkan lini kendaraan listrik dengan efisiensi energi terbaik di kelasnya untuk masa depan yang lebih hijau.</p>
-            <a href="#" class="btn-filled">Baca Selengkapnya</a>
+            <a href="artikel.html?post=era-mobil-listrik-2026" class="btn-filled">Baca Selengkapnya</a>
         </div>
     </section>
 
@@ -360,9 +404,11 @@
 
     <section class="blg-grid-section">
         <div class="container">
+
             <div class="blg-grid" id="blogGrid">
                 
-                <article class="blg-card" data-category="Perawatan" data-title="5 Cara Menjaga Interior Kulit Nappa Tetap Mewah">
+                <!-- 1 -->
+                <article class="blg-card" data-post="nappa-care" data-category="Perawatan" data-title="5 Cara Menjaga Interior Kulit Nappa Tetap Mewah">
                     <div class="blg-card-img">
                         <img src="https://images.unsplash.com/photo-1498887960847-2a5e46312788?auto=format&fit=crop&q=80&w=600" alt="">
                     </div>
@@ -372,12 +418,13 @@
                         <p>Tips menjaga jok kulit unit Star agar tidak retak dan tetap harum mewah.</p>
                         <div class="blg-card-footer">
                             <span class="blg-author">Admin Star</span>
-                            <a href="#" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                            <a href="artikel.html?post=nappa-care" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="blg-card" data-category="Event" data-title="Dokumentasi: Dealer Star Expo Jakarta 2026">
+                <!-- 2 -->
+                <article class="blg-card" data-post="expo-jakarta-2026" data-category="Event" data-title="Dokumentasi: Dealer Star Expo Jakarta 2026">
                     <div class="blg-card-img">
                         <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=600" alt="">
                     </div>
@@ -387,12 +434,13 @@
                         <p>Keseruan pameran otomotif termegah awal tahun ini di pusat ibu kota.</p>
                         <div class="blg-card-footer">
                             <span class="blg-author">Event Team</span>
-                            <a href="#" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                            <a href="artikel.html?post=expo-jakarta-2026" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="blg-card" data-category="Teknologi" data-title="Mengenal Fitur ADAS Lvl 2 di Unit Star SUV">
+                <!-- 3 -->
+                <article class="blg-card" data-post="adas-lvl2" data-category="Teknologi" data-title="Mengenal Fitur ADAS Lvl 2 di Unit Star SUV">
                     <div class="blg-card-img">
                         <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600" alt="">
                     </div>
@@ -402,12 +450,13 @@
                         <p>Bagaimana sistem pintar Dealer Star menjaga keamanan Anda di jalan raya.</p>
                         <div class="blg-card-footer">
                             <span class="blg-author">Tech Concierge</span>
-                            <a href="#" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                            <a href="artikel.html?post=adas-lvl2" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </article>
 
-                <article class="blg-card" data-category="Teknologi" data-title="Keunggulan Baterai Solid State Dealer Star">
+                <!-- 4 -->
+                <article class="blg-card" data-post="solid-state-battery" data-category="Teknologi" data-title="Keunggulan Baterai Solid State Dealer Star">
                     <div class="blg-card-img">
                         <img src="https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?auto=format&fit=crop&q=80&w=600" alt="">
                     </div>
@@ -417,7 +466,87 @@
                         <p>Mengapa baterai terbaru kami mampu bertahan hingga puluhan tahun pemakaian.</p>
                         <div class="blg-card-footer">
                             <span class="blg-author">Tech Concierge</span>
-                            <a href="#" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                            <a href="artikel.html?post=solid-state-battery" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 5 -->
+                <article class="blg-card" data-post="charging-smart" data-category="Teknologi" data-title="Charging Cerdas di Rumah: Aman, Cepat, Efisien">
+                    <div class="blg-card-img">
+                        <img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1b?auto=format&fit=crop&q=80&w=600" alt="">
+                    </div>
+                    <div class="blg-card-body">
+                        <div class="blg-card-meta">Teknologi <span>• 07 Jan 2026</span></div>
+                        <h3>Charging Cerdas di Rumah: Aman, Cepat, Efisien</h3>
+                        <p>Panduan setup wallbox, jadwal charging, dan tips menjaga baterai tetap prima.</p>
+                        <div class="blg-card-footer">
+                            <span class="blg-author">Tech Concierge</span>
+                            <a href="artikel.html?post=charging-smart" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 6 -->
+                <article class="blg-card" data-post="ceramic-coating-care" data-category="Perawatan" data-title="Perawatan Ceramic Coating: Kilap Tahan Lama Tanpa Ribet">
+                    <div class="blg-card-img">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="">
+                    </div>
+                    <div class="blg-card-body">
+                        <div class="blg-card-meta">Perawatan <span>• 06 Jan 2026</span></div>
+                        <h3>Perawatan Ceramic Coating: Kilap Tahan Lama Tanpa Ribet</h3>
+                        <p>Rutinitas wash yang benar, produk yang aman, dan kesalahan umum yang perlu dihindari.</p>
+                        <div class="blg-card-footer">
+                            <span class="blg-author">Admin Star</span>
+                            <a href="artikel.html?post=ceramic-coating-care" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 7 -->
+                <article class="blg-card" data-post="ban-suv-check" data-category="Perawatan" data-title="Checklist Ban SUV Premium: Nyaman, Senyap, dan Aman">
+                    <div class="blg-card-img">
+                        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&q=80&w=600" alt="">
+                    </div>
+                    <div class="blg-card-body">
+                        <div class="blg-card-meta">Perawatan <span>• 04 Jan 2026</span></div>
+                        <h3>Checklist Ban SUV Premium: Nyaman, Senyap, dan Aman</h3>
+                        <p>Tekanan ideal, rotasi ban, dan tanda ban harus diganti agar berkendara tetap premium.</p>
+                        <div class="blg-card-footer">
+                            <span class="blg-author">Admin Star</span>
+                            <a href="artikel.html?post=ban-suv-check" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 8 -->
+                <article class="blg-card" data-post="launching-ev-night" data-category="Event" data-title="Aftermovie: Launching Night EV Series Dealer Star">
+                    <div class="blg-card-img">
+                        <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&q=80&w=600" alt="">
+                    </div>
+                    <div class="blg-card-body">
+                        <div class="blg-card-meta">Event <span>• 02 Jan 2026</span></div>
+                        <h3>Aftermovie: Launching Night EV Series Dealer Star</h3>
+                        <p>Malam peluncuran yang elegan—test drive eksklusif, demo teknologi, dan lounge premium.</p>
+                        <div class="blg-card-footer">
+                            <span class="blg-author">Event Team</span>
+                            <a href="artikel.html?post=launching-ev-night" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 9 -->
+                <article class="blg-card" data-post="infotainment-tips" data-category="Teknologi" data-title="Trik Infotainment Premium: Navigasi, Voice, dan Personalisasi">
+                    <div class="blg-card-img">
+                        <img src="https://images.unsplash.com/photo-1552519507-88aa2dfa9fdb?auto=format&fit=crop&q=80&w=600" alt="">
+                    </div>
+                    <div class="blg-card-body">
+                        <div class="blg-card-meta">Teknologi <span>• 01 Jan 2026</span></div>
+                        <h3>Trik Infotainment Premium: Navigasi, Voice, dan Personalisasi</h3>
+                        <p>Optimalkan layar, shortcut, profil pengemudi, dan integrasi smartphone untuk pengalaman seamless.</p>
+                        <div class="blg-card-footer">
+                            <span class="blg-author">Tech Concierge</span>
+                            <a href="artikel.html?post=infotainment-tips" class="blg-read-link">Baca <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </article>
@@ -429,6 +558,14 @@
                 </div>
 
             </div>
+
+            <!-- PAGINATION BAR -->
+            <div class="blg-pagination" id="paginationBar" style="display:none;">
+                <button class="blg-page-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Prev</button>
+                <div class="blg-page-info" id="pageInfo">Halaman 1 dari 1</div>
+                <button class="blg-page-btn" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+
         </div>
     </section>
 
@@ -481,41 +618,104 @@
     <script>
         const searchInput = document.getElementById('blogSearch');
         const catItems = document.querySelectorAll('.blg-cat-item');
-        const articles = document.querySelectorAll('.blg-card');
+        const articles = Array.from(document.querySelectorAll('.blg-card'));
         const noResults = document.getElementById('noResults');
 
+        // Pagination elements
+        const paginationBar = document.getElementById('paginationBar');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageInfo = document.getElementById('pageInfo');
+
         let activeCategory = 'Semua';
+        let currentPage = 1;
+
+        function getPerPage() {
+            // desktop: 6 per halaman, tablet: 6, mobile: 4 (lebih nyaman scroll)
+            if (window.innerWidth <= 768) return 4;
+            return 6;
+        }
+
+        function applyPagination(filteredCards) {
+            const perPage = getPerPage();
+            const total = filteredCards.length;
+            const totalPages = Math.max(1, Math.ceil(total / perPage));
+
+            if (currentPage > totalPages) currentPage = 1;
+
+            // Hide all first
+            articles.forEach(card => card.classList.add('hidden'));
+
+            // Show only current page
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const pageCards = filteredCards.slice(start, end);
+            pageCards.forEach(card => card.classList.remove('hidden'));
+
+            // noResults / pagination visibility
+            noResults.style.display = (total === 0) ? 'block' : 'none';
+            paginationBar.style.display = (total > perPage) ? 'flex' : 'none';
+
+            // Buttons state
+            prevBtn.disabled = (currentPage === 1);
+            nextBtn.disabled = (currentPage === totalPages);
+
+            pageInfo.textContent = `Halaman ${currentPage} dari ${totalPages}`;
+        }
 
         function updateFilter() {
             const query = searchInput.value.toLowerCase();
-            let visibleCount = 0;
 
-            articles.forEach(card => {
-                const title = card.getAttribute('data-title').toLowerCase();
-                const category = card.getAttribute('data-category');
-
+            // Filter cards by search + category
+            const filtered = articles.filter(card => {
+                const title = (card.getAttribute('data-title') || '').toLowerCase();
+                const category = card.getAttribute('data-category') || '';
                 const matchesSearch = title.includes(query);
                 const matchesCat = (activeCategory === 'Semua' || category === activeCategory);
-
-                if (matchesSearch && matchesCat) {
-                    card.classList.remove('hidden');
-                    visibleCount++;
-                } else {
-                    card.classList.add('hidden');
-                }
+                return matchesSearch && matchesCat;
             });
 
-            noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+            applyPagination(filtered);
         }
 
-        searchInput.addEventListener('input', updateFilter);
+        // Search -> reset page
+        searchInput.addEventListener('input', () => {
+            currentPage = 1;
+            updateFilter();
+        });
 
+        // Category click -> reset page
         catItems.forEach(item => {
             item.addEventListener('click', () => {
                 catItems.forEach(i => i.classList.remove('active'));
                 item.classList.add('active');
                 activeCategory = item.getAttribute('data-filter');
+                currentPage = 1;
                 updateFilter();
+            });
+        });
+
+        // Prev/Next pagination
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updateFilter();
+                window.scrollTo({ top: document.querySelector('.blg-grid-section').offsetTop - 120, behavior: 'smooth' });
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentPage++;
+            updateFilter();
+            window.scrollTo({ top: document.querySelector('.blg-grid-section').offsetTop - 120, behavior: 'smooth' });
+        });
+
+        // Klik kartu artikel => buka artikel sesuai post (tetap 1 file artikel.html)
+        articles.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a')) return;
+                const post = card.getAttribute('data-post');
+                if (post) window.location.href = `artikel.html?post=${encodeURIComponent(post)}`;
             });
         });
 
@@ -530,6 +730,16 @@
                 }
             }
         }
+
+        // Recalculate perPage on resize (agar pagination proporsional)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                currentPage = 1;
+                updateFilter();
+            }, 120);
+        });
 
         window.addEventListener("scroll", reveal);
         window.onload = () => {
