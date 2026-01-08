@@ -1,10 +1,111 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ✅ SEO Core -->
     <title>Dealer Star - Eksklusivitas & Performa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Dealer Star adalah destinasi kendaraan premium di Jakarta: EV Series, Prestige SUV, Luxury MPV. Harga terbaik, garansi resmi, layanan 24/7, dan home test drive.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="Dealer Star">
+    <link rel="canonical" href="https://dealerstar.co.id/">
+
+    <!-- ✅ Social Preview (Open Graph / Twitter) -->
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dealer Star - Eksklusivitas & Performa">
+    <meta property="og:description" content="Pilihan mobil premium dengan layanan berstandar internasional. EV, SUV, MPV — harga terbaik & purna jual unggulan.">
+    <meta property="og:url" content="https://dealerstar.co.id/">
+    <meta property="og:image" content="https://dealerstar.co.id/img/logo.jpeg">
+    <meta property="og:image:alt" content="Logo Dealer Star">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dealer Star - Eksklusivitas & Performa">
+    <meta name="twitter:description" content="Dealer mobil premium di Jakarta: EV, SUV, MPV. Layanan 24/7, garansi resmi, dan home test drive.">
+    <meta name="twitter:image" content="https://dealerstar.co.id/img/logo.jpeg">
+
+    <!-- ✅ UX / Theme -->
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- ✅ Favicons (maksimal) -->
+    <!-- Pastikan file ini tersedia di server agar tidak 404:
+         /favicon.ico, /favicon-16x16.png, /favicon-32x32.png, /apple-touch-icon.png, /site.webmanifest -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Fallback favicon (jika belum punya set lengkap) -->
+    <link rel="shortcut icon" href="img/logo.jpeg">
+
+    <!-- ✅ Performance: Preconnect + Preload (LCP) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <!-- Preload asset penting (LCP/branding) -->
+    <link rel="preload" href="img/mobil.avif" as="image" type="image/avif" fetchpriority="high">
+    <link rel="preload" href="img/logo.jpeg" as="image">
+
+    <!-- ✅ FontAwesome non-render-blocking (PageSpeed) -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
+
+    <!-- ✅ Schema.org JSON-LD (AI Overview / Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["AutoDealer", "LocalBusiness"],
+          "@id": "https://dealerstar.co.id/#dealer",
+          "name": "Dealer Star",
+          "url": "https://dealerstar.co.id/",
+          "image": "https://dealerstar.co.id/img/logo.jpeg",
+          "logo": "https://dealerstar.co.id/img/logo.jpeg",
+          "telephone": "+62-21-500-STAR",
+          "email": "info@dealerstar.co.id",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Sudirman Central Business",
+            "addressLocality": "Jakarta",
+            "addressCountry": "ID"
+          },
+          "sameAs": [
+            "https://wa.me/628123456789"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://dealerstar.co.id/#website",
+          "url": "https://dealerstar.co.id/",
+          "name": "Dealer Star",
+          "publisher": { "@id": "https://dealerstar.co.id/#dealer" },
+          "inLanguage": "id-ID",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://dealerstar.co.id/blog.html?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://dealerstar.co.id/#webpage",
+          "url": "https://dealerstar.co.id/",
+          "name": "Dealer Star - Eksklusivitas & Performa",
+          "isPartOf": { "@id": "https://dealerstar.co.id/#website" },
+          "about": { "@id": "https://dealerstar.co.id/#dealer" },
+          "inLanguage": "id-ID"
+        }
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --primary: #e67e22;
@@ -402,11 +503,13 @@
     <header>
         <div class="container nav-container">
             <div class="logo">
-                <a href="index.html"><img src="img/logo.jpeg" alt="Dealer Star Logo"></a>
+                <a href="index.html">
+                    <img src="img/logo.jpeg" alt="Dealer Star - Dealer Mobil Premium Jakarta" width="220" height="220" decoding="async">
+                </a>
             </div>
 
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
+            <div class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu navigasi">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </div>
 
             <nav id="nav-menu">
@@ -419,7 +522,7 @@
             </nav>
 
             <div class="auth-buttons">
-                <a href="https://wa.me/628123456789" class="btn-filled">Kontak Eksklusif</a>
+                <a href="https://wa.me/628123456789" class="btn-filled" aria-label="Kontak WhatsApp Dealer Star">Kontak Eksklusif</a>
             </div>
         </div>
     </header>
@@ -436,7 +539,7 @@
                 </div>
             </div>
             <div class="hero-visual reveal reveal-right">
-                <img src="img/mobil.avif" alt="Star Car">
+                <img src="img/mobil.avif" alt="Mobil premium Dealer Star untuk EV, SUV, dan MPV" width="700" height="480" decoding="async" fetchpriority="high">
             </div>
         </div>
     </section>
@@ -447,27 +550,27 @@
             
             <div class="filter-bar">
                 <div class="filter-item active" onclick="filterCategory('EV', this)">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt=""> EV Series
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Ikon EV Series" loading="lazy" decoding="async" width="30" height="30"> EV Series
                 </div>
                 <div class="filter-item" onclick="filterCategory('SUV', this)">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png" alt=""> Prestige SUV
+                    <img src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png" alt="Ikon Prestige SUV" loading="lazy" decoding="async" width="30" height="30"> Prestige SUV
                 </div>
                 <div class="filter-item" onclick="filterCategory('MPV', this)">
-                    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt=""> Luxury MPV
+                    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" alt="Ikon Luxury MPV" loading="lazy" decoding="async" width="30" height="30"> Luxury MPV
                 </div>
             </div>
 
             <div class="carousel-container">
                 <div class="carousel-main">
-                    <img id="prevImg" class="side-car" src="" alt="" onclick="prevCar()">
-                    <img id="mainImg" class="center-car" src="" alt="">
-                    <img id="nextImg" class="side-car" src="" alt="" onclick="nextCar()">
+                    <img id="prevImg" class="side-car" src="" alt="Unit sebelumnya" onclick="prevCar()" loading="lazy" decoding="async" width="220" height="140">
+                    <img id="mainImg" class="center-car" src="" alt="Unit unggulan Dealer Star" decoding="async" width="650" height="420">
+                    <img id="nextImg" class="side-car" src="" alt="Unit berikutnya" onclick="nextCar()" loading="lazy" decoding="async" width="220" height="140">
                 </div>
 
                 <!-- REVISI: tombol dipindah ke bawah gambar -->
                 <div class="catalog-nav">
-                    <button class="catalog-btn" onclick="prevCar()">Perv</button>
-                    <button class="catalog-btn" onclick="nextCar()">Next</button>
+                    <button class="catalog-btn" onclick="prevCar()" aria-label="Katalog sebelumnya">Perv</button>
+                    <button class="catalog-btn" onclick="nextCar()" aria-label="Katalog berikutnya">Next</button>
                 </div>
 
                 <div class="car-info-row" id="infoRow">
@@ -495,22 +598,22 @@
             <h2 class="section-title" style="color: white;">Mengapa <span>Dealer Star?</span></h2>
             <div class="why-grid">
                 <div class="why-card">
-                    <i class="fas fa-certificate"></i>
+                    <i class="fas fa-certificate" aria-hidden="true"></i>
                     <h4>Garansi Resmi</h4>
                     <p>Perlindungan penuh hingga 5 tahun untuk ketenangan berkendara Anda.</p>
                 </div>
                 <div class="why-card">
-                    <i class="fas fa-tools"></i>
+                    <i class="fas fa-tools" aria-hidden="true"></i>
                     <h4>Layanan 24/7</h4>
                     <p>Bantuan darurat di jalan dan konsultasi teknis kapanpun Anda butuhkan.</p>
                 </div>
                 <div class="why-card">
-                    <i class="fas fa-hand-holding-usd"></i>
+                    <i class="fas fa-hand-holding-usd" aria-hidden="true"></i>
                     <h4>Harga Terbaik</h4>
                     <p>Penawaran harga paling kompetitif dengan opsi cicilan bunga 0%.</p>
                 </div>
                 <div class="why-card">
-                    <i class="fas fa-car-side"></i>
+                    <i class="fas fa-car-side" aria-hidden="true"></i>
                     <h4>Home Test Drive</h4>
                     <p>Kami bawakan mobil impian Anda ke depan pintu rumah untuk diuji coba.</p>
                 </div>
@@ -522,30 +625,30 @@
         <h2 class="section-title">Berita & <span>Panduan</span></h2>
         <div class="blog-grid">
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=600" alt="Teknologi mobil: fitur dan inovasi kendaraan" loading="lazy" decoding="async" width="600" height="400">
                 <div class="blog-card-content" style="padding: 30px;">
                     <span class="blog-tag">Technology</span>
                     <h4>Masa Depan Mobil Listrik 2026</h4>
                     <p>Bagaimana infrastruktur charging station mendukung gaya hidup modern kita...</p>
-                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=600" alt="Perawatan interior mobil premium: tips menjaga kualitas" loading="lazy" decoding="async" width="600" height="400">
                 <div class="blog-card-content" style="padding: 30px;">
                     <span class="blog-tag">Maintenance</span>
                     <h4>5 Cara Menjaga Interior Mobil</h4>
                     <p>Tips merawat kulit jok asli dan panel wood agar tidak mudah kusam dan retak...</p>
-                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Blog">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600" alt="Event pameran mobil premium: highlight expo Jakarta" loading="lazy" decoding="async" width="600" height="400">
                 <div class="blog-card-content" style="padding: 30px;">
                     <span class="blog-tag">Promo</span>
                     <h4>Highlight Expo Jakarta</h4>
                     <p>Dokumentasi kemeriahan acara pameran mobil termewah di awal tahun ini...</p>
-                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right"></i></a>
+                    <a href="#" style="color: var(--dark); font-weight: 800; text-decoration: none; font-size: 13px; margin-top: 15px; display: inline-block;">BACA ARTIKEL <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -557,32 +660,38 @@
         </div>
 
         <div class="container testi-slider">
-            <button class="testi-nav prev" id="testiPrevBtn" onclick="prevTesti()"><i class="fas fa-chevron-left"></i></button>
-            <button class="testi-nav next" id="testiNextBtn" onclick="nextTesti()"><i class="fas fa-chevron-right"></i></button>
+            <button class="testi-nav prev" id="testiPrevBtn" onclick="prevTesti()" aria-label="Testimoni sebelumnya"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+            <button class="testi-nav next" id="testiNextBtn" onclick="nextTesti()" aria-label="Testimoni berikutnya"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 
             <div class="testi-viewport">
                 <div class="testi-wrapper">
                     <div class="testi-card">
-                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x" aria-hidden="true"></i></div>
                         <p>"Dealer Star memberikan layanan VVIP. Mobil impian saya sampai lebih cepat dari estimasi dengan kondisi sempurna!"</p>
                         <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=1" width="100%" alt=""></div>
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;">
+                                <img src="https://i.pravatar.cc/150?u=1" width="50" height="50" alt="Foto pelanggan Robert Downey" loading="lazy" decoding="async">
+                            </div>
                             <div><strong>Robert Downey</strong><br><small style="color: var(--primary);">Executive CEO</small></div>
                         </div>
                     </div>
                     <div class="testi-card">
-                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x" aria-hidden="true"></i></div>
                         <p>"Terima kasih Dealer Star. Proses tukar tambah sangat transparan dan harga yang diberikan sangat kompetitif."</p>
                         <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=2" width="100%" alt=""></div>
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;">
+                                <img src="https://i.pravatar.cc/150?u=2" width="50" height="50" alt="Foto pelanggan Amanda Rawles" loading="lazy" decoding="async">
+                            </div>
                             <div><strong>Amanda Rawles</strong><br><small style="color: var(--primary);">Public Figure</small></div>
                         </div>
                     </div>
                     <div class="testi-card">
-                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x"></i></div>
+                        <div style="color: var(--primary); margin-bottom: 20px;"><i class="fas fa-quote-left fa-2x" aria-hidden="true"></i></div>
                         <p>"Sangat puas dengan layanan after-salesnya. Servis berkala jadi sangat mudah dan tidak perlu antre lama."</p>
                         <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;"><img src="https://i.pravatar.cc/150?u=3" width="100%" alt=""></div>
+                            <div style="width: 50px; height: 50px; border-radius: 50%; background: #444; overflow: hidden;">
+                                <img src="https://i.pravatar.cc/150?u=3" width="50" height="50" alt="Foto pelanggan Kevin Sanjaya" loading="lazy" decoding="async">
+                            </div>
                             <div><strong>Kevin Sanjaya</strong><br><small style="color: var(--primary);">Professional Athlete</small></div>
                         </div>
                     </div>
@@ -596,19 +705,19 @@
             <h2 class="section-title">Frequently Asked <span>Questions</span></h2>
             <div class="faq-container">
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Bagaimana cara memesan test drive? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-question">Bagaimana cara memesan test drive? <i class="fas fa-plus faq-icon" aria-hidden="true"></i></div>
                     <div class="faq-answer">Anda dapat mengklik tombol "Book Test Drive" di bagian hero atau menghubungi sales kami melalui WhatsApp. Kami dapat membawakan unit ke rumah Anda.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Apakah melayani tukar tambah? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-question">Apakah melayani tukar tambah? <i class="fas fa-plus faq-icon" aria-hidden="true"></i></div>
                     <div class="faq-answer">Ya, Dealer Star melayani Trade-In (tukar tambah) dengan harga taksir yang sangat kompetitif dan transparan untuk semua merk mobil.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Apa saja syarat pengajuan kredit? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-question">Apa saja syarat pengajuan kredit? <i class="fas fa-plus faq-icon" aria-hidden="true"></i></div>
                     <div class="faq-answer">Syarat umum meliputi KTP, KK, NPWP, Slip Gaji/Surat Keterangan Penghasilan, dan rekening koran 3 bulan terakhir. Tim kami akan membantu prosesnya hingga approve.</div>
                 </div>
                 <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">Berapa lama garansi unit mobil baru? <i class="fas fa-plus faq-icon"></i></div>
+                    <div class="faq-question">Berapa lama garansi unit mobil baru? <i class="fas fa-plus faq-icon" aria-hidden="true"></i></div>
                     <div class="faq-answer">Setiap unit baru di Dealer Star dilengkapi garansi resmi pabrikan hingga 5 tahun atau 100.000 KM, tergantung mana yang tercapai lebih dulu.</div>
                 </div>
             </div>
@@ -618,7 +727,7 @@
     <footer>
         <div class="container footer-grid">
             <div class="footer-col reveal reveal-up">
-                <img src="img/logo.jpeg" class="footer-logo" alt="Logo">
+                <img src="img/logo.jpeg" class="footer-logo" alt="Dealer Star - Logo" width="160" height="160" loading="lazy" decoding="async">
                 <p style="font-size: 14px; color: #888;">Destinasi utama kendaraan premium di Indonesia dengan layanan terintegrasi dan standar internasional.</p>
             </div>
             <div class="footer-col reveal reveal-up">
@@ -641,9 +750,9 @@
             </div>
             <div class="footer-col reveal reveal-up">
                 <h4>Kontak</h4>
-                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;"></i> Sudirman Central Business, Jakarta</p>
-                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;"></i> 021-500-STAR</p>
-                <p style="color: #888; font-size: 14px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;"></i> info@dealerstar.co.id</p>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-map-marker-alt" style="color: var(--primary); margin-right: 10px;" aria-hidden="true"></i> Sudirman Central Business, Jakarta</p>
+                <p style="color: #888; font-size: 14px; margin-bottom: 10px;"><i class="fas fa-phone" style="color: var(--primary); margin-right: 10px;" aria-hidden="true"></i> 021-500-STAR</p>
+                <p style="color: #888; font-size: 14px;"><i class="fas fa-envelope" style="color: var(--primary); margin-right: 10px;" aria-hidden="true"></i> info@dealerstar.co.id</p>
             </div>
         </div>
     </footer>
